@@ -1,0 +1,1658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>NOVA &mdash; Founder's Office / Chief of Staff Path</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Inter:wght@400;500;600;700;800&amp;family=IBM+Plex+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf8f3;
+  --bg2: #f3f0e8;
+  --surface: #ffffff;
+  --surface-2: #f6f3ec;
+  --surface-3: #ece6d6;
+  --line: #e1dac5;
+  --line-soft: #ece7d9;
+  --ink: #262019;
+  --ink-dim: #6b6255;
+  --ink-mute: #9c9484;
+  --amber: #b45309;
+  --amber-ink: #fffaf3;
+  --amber-dim: rgba(180,83,9,0.09);
+  --amber-line: rgba(180,83,9,0.4);
+  --cyan: #0d8a7d;
+  --cyan-dim: rgba(13,138,125,0.09);
+  --violet: #6d5bd0;
+  --violet-dim: rgba(109,91,208,0.09);
+  --danger: #d1462f;
+  --danger-dim: rgba(209,70,47,0.09);
+  --code-bg: #f1ece0;
+  --shadow-card: 0 1px 2px rgba(60,50,30,0.05), 0 4px 14px rgba(60,50,30,0.05);
+  --radius: 14px;
+  --radius-sm: 8px;
+  --font-display: 'Space Grotesk','Inter',sans-serif;
+  --font-body: 'Inter',-apple-system,BlinkMacSystemFont,sans-serif;
+  --font-mono: 'IBM Plex Mono','SF Mono',monospace;
+}
+* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html { scroll-behavior:smooth; }
+@media (prefers-reduced-motion: reduce) { html{scroll-behavior:auto;} *{animation-duration:.001ms !important; transition-duration:.001ms !important;} }
+body {
+  font-family: var(--font-body);
+  background:
+    radial-gradient(1200px 600px at 15% -10%, rgba(180,83,9,0.05), transparent 60%),
+    radial-gradient(1000px 500px at 100% 0%, rgba(13,138,125,0.05), transparent 55%),
+    var(--bg);
+  color: var(--ink);
+  line-height: 1.6;
+  min-height: 100vh;
+}
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 80px; }
+:focus-visible { outline: 2px solid var(--amber); outline-offset: 2px; border-radius: 4px; }
+::-webkit-scrollbar { width:6px; height:6px; }
+::-webkit-scrollbar-track { background:var(--bg); }
+::-webkit-scrollbar-thumb { background:var(--surface-3); border-radius:3px; }
+a { color: var(--cyan); }
+
+/* ===== APP BAR (sticky header + tabs) ===== */
+.appbar { position:sticky; top:0; z-index:40; background:rgba(250,248,243,0.94); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line-soft); margin:0 -16px; padding:0 16px; }
+.appbar-top { display:flex; align-items:center; gap:12px; padding:14px 0 10px; }
+.ring-wrap { position:relative; width:46px; height:46px; flex-shrink:0; }
+.ring-wrap svg { transform:rotate(-90deg); }
+.ring-bg { fill:none; stroke:var(--surface-3); stroke-width:5; }
+.ring-fg { fill:none; stroke:var(--amber); stroke-width:5; stroke-linecap:round; transition:stroke-dashoffset .5s ease; }
+.ring-pct { position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-family:var(--font-mono); font-weight:700; font-size:0.62rem; color:var(--amber); }
+.app-id { flex:1; min-width:0; }
+.app-name { font-family:var(--font-display); font-size:1rem; font-weight:700; letter-spacing:-0.2px; line-height:1.2; }
+.app-sub { font-size:0.72rem; color:var(--ink-dim); margin-top:1px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.sync-status { flex-shrink:0; font-family:var(--font-mono); font-size:0.62rem; color:var(--ink-mute); display:flex; align-items:center; gap:5px; padding:4px 9px; border:1px solid var(--line-soft); border-radius:999px; background:var(--surface); white-space:nowrap; }
+.sync-dot { width:7px; height:7px; border-radius:50%; background:var(--ink-mute); flex-shrink:0; }
+.sync-status.ok .sync-dot { background:var(--cyan); }
+.sync-status.local .sync-dot { background:var(--amber); }
+.sync-status.err .sync-dot { background:var(--danger); }
+
+.tabbar { display:flex; gap:2px; overflow-x:auto; scrollbar-width:none; -webkit-overflow-scrolling:touch; }
+.tabbar::-webkit-scrollbar{display:none;}
+.tab-btn {
+  flex-shrink:0; padding:9px 12px 11px; background:none; border:none; cursor:pointer;
+  color:var(--ink-mute); font-family:var(--font-mono); font-size:0.72rem; font-weight:600; letter-spacing:.2px;
+  white-space:nowrap; border-bottom:2px solid transparent; margin-bottom:-1px;
+}
+.tab-btn:hover { color:var(--ink); }
+.tab-btn.active { color:var(--amber); border-bottom-color:var(--amber); }
+
+/* ===== TAB PANELS ===== */
+.tabpanel { display:none; padding-top:20px; }
+.tabpanel.active { display:block; }
+
+.phase-head { margin-bottom: 14px; }
+.phase-eyebrow { font-family:var(--font-mono); font-size:0.68rem; font-weight:700; color:var(--amber); text-transform:uppercase; letter-spacing:1.4px; display:flex; align-items:center; gap:8px; }
+.phase-eyebrow .n { background:var(--amber); color:var(--amber-ink); border-radius:5px; padding:1px 7px; }
+.phase-title { font-family:var(--font-display); font-size:1.18rem; font-weight:700; margin-top:6px; }
+.phase-desc { font-size:0.86rem; color:var(--ink-dim); margin-top:5px; line-height:1.6; max-width:60ch; }
+
+.sub-title {
+  font-family: var(--font-mono); font-size:0.68rem; font-weight:700; color:var(--ink-dim);
+  text-transform:uppercase; letter-spacing:1px; margin: 22px 2px 8px; display:flex; align-items:center; gap:8px;
+}
+.sub-title::before { content:'›'; color:var(--amber); }
+.sub-title .count { margin-left:auto; color:var(--ink-mute); font-weight:400; text-transform:none; letter-spacing:0; }
+
+.term-band { font-family:var(--font-mono); font-size:0.76rem; color:var(--ink-dim); margin:22px 2px 10px; padding:8px 12px; border-left:2px solid var(--amber-line); background:var(--surface); border-radius:0 8px 8px 0; }
+.term-band b { color:var(--ink); }
+
+@media (min-width:860px){
+  body { display:flex; }
+  .wrap { max-width:none; flex:1; padding:0 0 80px; display:flex; }
+  .appbar { position:sticky; top:0; left:0; height:100vh; width:216px; flex-shrink:0; margin:0; border-right:1px solid var(--line-soft); border-bottom:none; padding:20px 14px; display:flex; flex-direction:column; }
+  .appbar-top { flex-direction:column; align-items:flex-start; gap:10px; padding:0 0 18px; }
+  .tabbar { flex-direction:column; gap:2px; overflow-x:visible; }
+  .tab-btn { text-align:left; border-bottom:none; border-left:2px solid transparent; padding:10px 12px; border-radius:8px; }
+  .tab-btn.active { background:var(--amber-dim); border-left-color:var(--amber); border-bottom-color:transparent; }
+  .tabpanel-outer { flex:1; min-width:0; padding:0 32px; max-width:800px; }
+}
+
+/* ===== CARD ===== */
+.card { background:var(--surface); border:1px solid var(--line-soft); border-radius:var(--radius); padding:16px; margin-bottom:12px; box-shadow:var(--shadow-card); }
+.card-title { font-family:var(--font-display); font-weight:700; font-size:0.98rem; margin-bottom:9px; display:flex; align-items:center; gap:8px; }
+.card-text { color:var(--ink-dim); font-size:0.88rem; line-height:1.7; }
+.card-text strong { color:var(--ink); font-weight:600; }
+.card-text ul, .card-text ol { margin:8px 0 4px 20px; }
+.card-text li { margin:4px 0; }
+.card-text li::marker { color:var(--amber); font-family:var(--font-mono); font-size:0.8em; }
+
+/* ===== TASK ROWS (the core "tick and move on" unit) ===== */
+.task-list { display:flex; flex-direction:column; }
+.task {
+  display:flex; align-items:flex-start; gap:12px; padding:11px 4px;
+  border-bottom:1px solid var(--line-soft); cursor:pointer; border-radius:8px;
+}
+.task:last-child { border-bottom:none; }
+.task:hover { background:var(--surface-2); }
+.box {
+  width:21px; height:21px; border:2px solid var(--ink-mute); border-radius:6px; flex-shrink:0; margin-top:1px;
+  display:flex; align-items:center; justify-content:center; font-size:0.72rem; color:transparent;
+}
+.task.done .box { background:var(--amber); border-color:var(--amber); color:var(--amber-ink); }
+.task.done .t-main { text-decoration:line-through; color:var(--ink-mute); }
+.t-body { flex:1; min-width:0; }
+.t-main { font-size:0.9rem; color:var(--ink); font-weight:500; }
+.t-sub { font-size:0.78rem; color:var(--ink-dim); margin-top:2px; line-height:1.5; }
+
+/* ===== MODULE (details/summary, native — zero JS to expand) ===== */
+.module { background:var(--surface); border:1px solid var(--line-soft); border-radius:var(--radius); margin-bottom:10px; overflow:hidden; box-shadow:var(--shadow-card); }
+.module[open] { border-color: var(--line); }
+.module summary { list-style:none; cursor:pointer; padding:0; }
+.module summary::-webkit-details-marker { display:none; }
+.mod-row { display:flex; align-items:flex-start; gap:12px; padding:13px 14px; }
+.mod-row:hover { background:var(--surface-2); }
+.mod-check {
+  width:22px; height:22px; border:2px solid var(--ink-mute); border-radius:6px; flex-shrink:0; margin-top:1px;
+  display:flex; align-items:center; justify-content:center; font-size:0.75rem; color:transparent;
+}
+.module.done .mod-check { background:var(--cyan); border-color:var(--cyan); color:#fff; }
+.module.done .mod-name { color:var(--ink-mute); text-decoration:line-through; }
+.mod-num { font-family:var(--font-mono); font-size:0.66rem; color:var(--amber); font-weight:700; flex-shrink:0; min-width:52px; margin-top:2px; }
+.mod-mid { flex:1; min-width:0; }
+.mod-name { font-family:var(--font-display); font-weight:700; font-size:0.93rem; color:var(--ink); }
+.mod-meta { font-family:var(--font-mono); font-size:0.68rem; color:var(--ink-mute); margin-top:3px; }
+.mod-done-def { font-size:0.78rem; color:var(--ink-dim); margin-top:4px; }
+.mod-arrow { font-size:1.1rem; color:var(--ink-mute); flex-shrink:0; transition:transform .2s; margin-top:2px; }
+.module[open] .mod-arrow { transform:rotate(180deg); color:var(--amber); }
+.mod-detail { padding:0 16px 16px 66px; border-top:1px solid var(--line-soft); margin-top:2px; }
+.mod-detail .card-text { margin-top:12px; }
+.mod-links { display:flex; flex-wrap:wrap; gap:6px; margin-top:10px; }
+.mod-links a { font-family:var(--font-mono); font-size:0.7rem; color:var(--cyan); text-decoration:none; border:1px solid rgba(13,138,125,.3); background:var(--cyan-dim); padding:4px 9px; border-radius:var(--radius-sm); }
+.mod-links a:hover { border-color:var(--cyan); }
+.li-prompt { font-family:var(--font-mono); font-size:0.78rem; color:var(--ink-dim); background:var(--code-bg); border:1px solid var(--line-soft); border-radius:var(--radius-sm); padding:10px 12px; margin-top:10px; line-height:1.55; }
+
+/* ===== COPY BOX ===== */
+.copy-box { background:var(--code-bg); border:1px solid var(--line-soft); border-radius:var(--radius-sm); padding:14px; margin:10px 0; position:relative; }
+.copy-box pre { font-family:var(--font-mono); font-size:0.79rem; color:var(--ink); white-space:pre-wrap; word-break:break-word; line-height:1.6; padding-right: 60px;}
+.copy-btn { position:absolute; top:8px; right:8px; padding:5px 11px; font-family:var(--font-mono); font-size:0.66rem; font-weight:700; letter-spacing:.4px; background:var(--surface); border:1px solid var(--line); color:var(--ink-dim); border-radius:var(--radius-sm); cursor:pointer; }
+.copy-btn:hover { color:var(--amber); border-color:var(--amber); }
+
+/* ===== TABLE ===== */
+.tbl-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; margin:8px -2px; }
+.tbl { width:100%; min-width:100%; border-collapse:collapse; font-size:0.82rem; table-layout:fixed; }
+.tbl th { text-align:left; padding:8px 7px; border-bottom:1px solid var(--line); color:var(--amber); font-family:var(--font-mono); font-weight:600; font-size:0.66rem; text-transform:uppercase; letter-spacing:.4px; word-break:break-word; }
+.tbl td { padding:9px 7px; border-bottom:1px solid var(--line-soft); color:var(--ink); vertical-align:top; word-break:break-word; overflow-wrap:anywhere; }
+.tbl tr:last-child td { border-bottom:none; }
+.tbl a { color:var(--cyan); overflow-wrap:anywhere; }
+
+/* ===== RESOURCE ITEM ===== */
+.res { display:flex; gap:11px; padding:11px 0; border-bottom:1px solid var(--line-soft); }
+.res:last-child { border-bottom:none; }
+.res-tag { flex-shrink:0; width:5px; border-radius:3px; align-self:stretch; }
+.res.free .res-tag { background:var(--cyan); }
+.res.paid .res-tag { background:var(--amber); }
+.res.community .res-tag { background:var(--violet); }
+.res-body { flex:1; min-width:0; }
+.res-title { font-weight:700; font-size:0.89rem; display:flex; align-items:center; gap:7px; flex-wrap:wrap; }
+.res-title a { color:var(--ink); text-decoration:none; }
+.res-title a:hover { color:var(--cyan); }
+.res-desc { color:var(--ink-dim); font-size:0.82rem; margin-top:3px; line-height:1.55; }
+.res-meta { font-family:var(--font-mono); font-size:0.65rem; color:var(--ink-mute); margin-top:4px; text-transform:uppercase; letter-spacing:.3px; }
+
+/* ===== BADGE ===== */
+.badge { display:inline-block; padding:2px 8px; border-radius:var(--radius-sm); font-family:var(--font-mono); font-size:0.62rem; font-weight:700; text-transform:uppercase; letter-spacing:.4px; white-space:nowrap; }
+.b-free { background:var(--cyan-dim); color:var(--cyan); border:1px solid rgba(13,138,125,.3); }
+.b-paid { background:var(--amber-dim); color:var(--amber); border:1px solid var(--amber-line); }
+.b-member { background:var(--violet-dim); color:var(--violet); border:1px solid rgba(109,91,208,.3); }
+
+/* ===== BUTTON ===== */
+.btn { display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:12px 18px; border-radius:var(--radius-sm); font-family:var(--font-mono); font-size:0.8rem; font-weight:700; letter-spacing:.3px; cursor:pointer; border:none; text-decoration:none; width:100%; margin-top:4px; }
+.btn-primary { background:var(--amber); color:var(--amber-ink); }
+.btn-primary:hover { opacity:.88; }
+.btn-ghost { background:var(--surface-2); color:var(--ink); border:1px solid var(--line); }
+.btn-ghost:hover { border-color:var(--amber-line); }
+.btn-row { display:flex; flex-direction:column; gap:8px; margin-top:10px; }
+@media (min-width:520px){ .btn-row.two { flex-direction:row; } .btn-row.two .btn{margin-top:0;} }
+
+/* ===== STREAK BLOCK ===== */
+.streak-box { display:flex; align-items:center; gap:16px; background:var(--surface-2); border:1px solid var(--line-soft); border-radius:var(--radius-sm); padding:14px; margin-top:12px; }
+.streak-num { font-family:var(--font-mono); font-size:1.6rem; font-weight:700; color:var(--amber); line-height:1; }
+.streak-label { font-family:var(--font-mono); font-size:0.62rem; color:var(--ink-mute); text-transform:uppercase; letter-spacing:.4px; margin-top:2px; }
+.streak-sep { width:1px; align-self:stretch; background:var(--line-soft); }
+
+/* ===== ADD ROW (job log) ===== */
+.add-row { display:flex; gap:8px; margin-top:12px; }
+.add-row input { flex:1; padding:10px 12px; background:var(--surface-2); border:1px solid var(--line); border-radius:var(--radius-sm); color:var(--ink); font-size:0.85rem; font-family:var(--font-body); }
+.add-row input:focus { outline:none; border-color:var(--amber); }
+.add-row button { padding:0 16px; background:var(--amber); color:var(--amber-ink); border:none; border-radius:var(--radius-sm); font-weight:700; font-family:var(--font-mono); font-size:0.78rem; cursor:pointer; }
+.task-del { background:none; border:none; color:var(--ink-mute); cursor:pointer; font-size:0.95rem; padding:6px; line-height:1; flex-shrink:0; }
+.task-del:hover { color:var(--danger); }
+
+/* ===== TIMELINE ===== */
+.tl { position:relative; padding-left:24px; }
+.tl::before { content:''; position:absolute; left:6px; top:4px; bottom:4px; width:1px; background:var(--line); }
+.tl-item { position:relative; margin-bottom:14px; padding-right:4px; }
+.tl-item:last-child{margin-bottom:0;}
+.tl-item::before { content:''; position:absolute; left:-24px; top:4px; width:10px; height:10px; border-radius:50%; background:var(--surface); border:2px solid var(--amber); }
+.tl-item.done::before { background:var(--cyan); border-color:var(--cyan); }
+.tl-title { font-weight:700; font-size:0.88rem; font-family:var(--font-display); }
+.tl-desc { color:var(--ink-dim); font-size:0.82rem; margin-top:2px; }
+
+/* ===== FOOTER ===== */
+.foot { margin-top:40px; padding-top:20px; border-top:1px solid var(--line-soft); font-family:var(--font-mono); font-size:0.7rem; color:var(--ink-mute); text-align:center; line-height:1.8; }
+.foot button { margin-top:10px; background:none; border:1px solid var(--line); color:var(--ink-mute); padding:8px 14px; border-radius:var(--radius-sm); font-family:var(--font-mono); font-size:0.68rem; cursor:pointer; }
+.foot button:hover { color:var(--danger); border-color:var(--danger); }
+
+/* back to top */
+.totop { position:fixed; right:16px; bottom:16px; width:42px; height:42px; border-radius:50%; background:var(--amber); color:var(--amber-ink); display:flex; align-items:center; justify-content:center; text-decoration:none; font-size:1.1rem; box-shadow:0 4px 16px rgba(60,50,30,.22); opacity:0; pointer-events:none; transition:opacity .2s; z-index:50; }
+.totop.show { opacity:1; pointer-events:auto; }
+
+@media print { .tabbar,.totop,.copy-btn,.sync-status{display:none;} body{background:#fff;color:#000;} .tabpanel{display:block !important;} }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="appbar">
+  <div class="appbar-top">
+    <div class="ring-wrap">
+      <svg width="46" height="46" viewBox="0 0 46 46">
+        <circle class="ring-bg" cx="23" cy="23" r="19"></circle>
+        <circle class="ring-fg" id="ringFg" cx="23" cy="23" r="19"></circle>
+      </svg>
+      <div class="ring-pct" id="ringPct">0%</div>
+    </div>
+    <div class="app-id">
+      <div class="app-name">NOVA</div>
+      <div class="app-sub">Asis &middot; Chief of Staff path</div>
+    </div>
+    <div class="sync-status local" id="syncStatus"><span class="sync-dot"></span><span id="syncLabel">Local</span></div>
+  </div>
+  <div class="tabbar" id="tabbar">
+    <button class="tab-btn active" data-tab="dashboard" onclick="showTab('dashboard')">Dashboard</button>
+    <button class="tab-btn" data-tab="plan" onclick="showTab('plan')">20-Week Plan</button>
+    <button class="tab-btn" data-tab="resources" onclick="showTab('resources')">Resources</button>
+    <button class="tab-btn" data-tab="playbook" onclick="showTab('playbook')">Playbook</button>
+    <button class="tab-btn" data-tab="jobs" onclick="showTab('jobs')">Job Tracker</button>
+    <button class="tab-btn" data-tab="skills" onclick="showTab('skills')">Skills</button>
+  </div>
+</div>
+
+<div class="tabpanel-outer">
+<div class="tabpanel active" id="tab-dashboard"><div class="phase-head">
+    <div class="phase-eyebrow"><span class="n">00</span>The map</div>
+    <div class="phase-title">Dashboard</div>
+    <div class="phase-desc">Mission, the daily rhythm, and proof the system is compounding.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">&#127919; The mission</div>
+    <div class="card-text">
+      Build yourself into the most dangerous candidate in the room for a <strong>Founder's Office / Chief of Staff</strong> role at a high-growth startup, targeting <strong>&#8377;36&ndash;50 LPA</strong>. Starting point: Operations Analyst. The wedge in: data and process fluency from four years on a manufacturing floor &mdash; a skill set most CoS candidates don't have.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">&#128205; Where you are on the map</div>
+    <div class="card-text">
+      <div class="tl">
+        <div class="tl-item done"><div class="tl-title">Now &mdash; Greenlam QA/QC</div><div class="tl-desc">&#8377;3&ndash;6L &middot; manufacturing ops + data</div></div>
+        <div class="tl-item"><div class="tl-title">Jump 1 &mdash; Business Operations Associate</div><div class="tl-desc">&#8377;10&ndash;15L &middot; Seed/Series A &middot; months 0&ndash;6</div></div>
+        <div class="tl-item"><div class="tl-title">Jump 2 &mdash; Senior Ops / Junior CoS</div><div class="tl-desc">&#8377;18&ndash;28L &middot; Series A/B &middot; months 6&ndash;12</div></div>
+        <div class="tl-item"><div class="tl-title">Jump 3 &mdash; Chief of Staff / VP Ops</div><div class="tl-desc">&#8377;36&ndash;50L &middot; high-growth startup &middot; months 12&ndash;18</div></div>
+      </div>
+      <div style="margin-top:12px; font-family:var(--font-mono); font-size:0.72rem; color:var(--ink-mute); line-height:1.7;">
+        Reality check, cross-checked live: Glassdoor puts Indian CoS pay at &#8377;13.75L&ndash;&#8377;35.9L for the 25th&ndash;75th percentile and up to &#8377;65.8L at the 90th; Levels.fyi's smaller, senior-skewed sample averages &#8377;46.5L total comp. 50L is a top-decile outcome, not a floor &mdash; the 20-week build is what closes that gap. Full detail in Resources &darr;.
+      </div>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">&#128337; How the rhythm works</div>
+    <div class="card-text">This shape repeats every week &mdash; swap in that week's curriculum module, book chapter, and dashboard number. It's reference, not 15 daily checkboxes: read it, run it, then hit the one button below when you've done it. That's the whole interaction.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">&#9728;&#65039; Morning block <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--ink-mute);font-weight:400;margin-left:auto;">5:00&ndash;8:00 AM</span></div>
+    <div class="card-text">
+      <ul>
+        <li>Post today's LinkedIn content <small style="color:var(--ink-mute);">&mdash; copy from Playbook, post ~8:30 AM</small></li>
+        <li>Build/extend one Excel dashboard for the portfolio (pivot table + conditional formatting + 1 chart)</li>
+        <li>Screenshot it and add to the Notion portfolio with a 2-line description</li>
+        <li>Mode Analytics SQL &mdash; 5 lessons at the current level</li>
+        <li>Reply to every comment on this morning's post within 60 minutes &mdash; substantive replies carry far more algorithmic weight than "thanks!"</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">&#127769; Evening block <span style="font-family:var(--font-mono);font-size:0.68rem;color:var(--ink-mute);font-weight:400;margin-left:auto;">7:00&ndash;8:30 PM</span></div>
+    <div class="card-text">
+      <ul>
+        <li>Chandoo &mdash; watch one dashboard tutorial</li>
+        <li>Send 5 LinkedIn connection requests (2 founders + 2 operators + 1 recruiter)</li>
+        <li>Comment on 5 posts with real thinking &mdash; not "great post," 15+ words carries roughly 2.5&times; the weight</li>
+        <li>Read 15&ndash;20 pages of the current book, take 3 notes</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">&#128221; Journal, before sleep</div>
+    <div class="card-text">
+      <ol>
+        <li>What did I BUILD today? (tangible output)</li>
+        <li>What did I POST today? (content, comment, connection)</li>
+        <li>What's the ONE thing I must do tomorrow?</li>
+      </ol>
+    </div>
+    <div class="streak-box" id="streakBox">
+      <div><div class="streak-num" id="streakCount">0</div><div class="streak-label">Day streak</div></div>
+      <div class="streak-sep"></div>
+      <div style="flex:1; font-size:0.82rem; color:var(--ink-dim);">Ran the rhythm today? One tap logs it &mdash; can't be double-counted, resets automatically if a day is skipped.</div>
+    </div>
+    <button class="btn btn-primary" onclick="markRhythmDone()" id="rhythmBtn">&#9989; Mark today's rhythm complete</button>
+  </div>
+
+  <div class="card">
+    <div class="card-title">&#128197; The weekly shape</div>
+    <div class="card-text" style="margin-bottom:6px;">Reuse this every week &mdash; swap the module, book chapter, dashboard number.</div>
+    <div class="tbl-wrap"><table class="tbl"><tr><th>Day</th><th>Focus</th><th>Detail</th></tr><tr><td>MON</td><td>Profile optimization</td><td>LinkedIn banner + Featured section + 5 connections + 5 comments. Read current book, Ch. 1.</td></tr><tr><td>TUE</td><td>Post + dashboard 1 + SQL</td><td>Post content. Build a dashboard. Mode SQL block 1. Chandoo tutorial.</td></tr><tr><td>WED</td><td>Post + SQL + case study</td><td>Post content. Mode SQL (GROUP BY, JOINs). Write a SQL case study in Notion. Dashboard 2.</td></tr><tr><td>THU</td><td>Post + SQL advanced + portfolio</td><td>Post content. Mode SQL (subqueries). Clean up Notion portfolio. Read on.</td></tr><tr><td>FRI</td><td>Application blitz</td><td>Post content. Apply to 5 roles (Wellfound 2, YC Jobs 2, LinkedIn 1). Log every one in Jobs &darr;.</td></tr><tr><td>SAT</td><td>Portfolio finish</td><td>Finish Notion portfolio. Optional dashboard 3. Review the week's LinkedIn analytics. Plan next week.</td></tr><tr><td>SUN</td><td>Rest + checkpoint</td><td>Answer the week's checkpoint quiz if the module has one. Add the portfolio link to LinkedIn.</td></tr></table></div>
+  </div>
+  <div class="card">
+    <div class="card-title">&#127919; Milestone map</div>
+    <div class="card-text" style="margin-bottom:10px;">Not weekly tasks &mdash; proof that the system is compounding. Tick one only when it's genuinely true.</div>
+    <div class="task-list"><div class="task done" data-id="milestone-1" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Month 1 &mdash; Profile rebuilt, Phase 1 started</div><div class="t-sub">12 posts &middot; 500+ profile views &middot; 50 new connections</div></div>
+    </div><div class="task" data-id="milestone-2" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Month 2 &mdash; First engagement from outside the network</div><div class="t-sub">First post with 10+ comments from strangers &middot; first DM from a founder/operator</div></div>
+    </div><div class="task" data-id="milestone-3" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Month 3 &mdash; First DMs from the startup space</div><div class="t-sub">5+ meaningful DMs &middot; 1 coffee chat &middot; Phase 2 complete</div></div>
+    </div><div class="task" data-id="milestone-4" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Month 4 &mdash; Founders begin following</div><div class="t-sub">3+ founders in follower list &middot; first inbound from a VC/operator</div></div>
+    </div><div class="task" data-id="milestone-5" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Month 5 &mdash; First inbound recruiter/founder message</div><div class="t-sub">1+ inbound about a role or “are you open to opportunities?”</div></div>
+    </div><div class="task" data-id="milestone-6" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Month 6 &mdash; Applying from a position of pull</div><div class="t-sub">3+ warm intros &middot; portfolio complete &middot; 2+ interviews</div></div>
+    </div><div class="task" data-id="milestone-7" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Month 7 &mdash; Full curriculum complete</div><div class="t-sub">20 weeks of proof-of-work &middot; LinkedIn is an active asset &middot; target: &#8377;36&ndash;50L offer</div></div>
+    </div></div>
+  </div></div><div class="tabpanel" id="tab-plan"><div class="phase-head">
+    <div class="phase-eyebrow"><span class="n">01</span>20 weeks</div>
+    <div class="phase-title">The 20-Week Plan</div>
+    <div class="phase-desc">One module a week. One tick each. Expand for the quiz, the links, the LinkedIn draft.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">&#128218; The Nova master syllabus</div>
+    <div class="card-text">20 modules &middot; 4 terms &middot; 20 weeks &middot; one path. Reverse-engineered from IIM Bangalore, Wharton, Columbia, the MTF Chief of Staff Certificate, the Founder's Office Fellowship, and CSA's enterprise certification. One tick per module &mdash; open it if you want the quiz, the links, or the LinkedIn draft. Definition of done is spelled out right under the title, no digging required.</div>
+  </div>
+<div class="term-band"><b>Term 1 &mdash; The business foundation</b> &middot; Weeks 1&ndash;5<br>Fluency in the language every founder and investor speaks: statements, margins, process, models, positioning.</div>
+<details class="module" data-id="mod-01">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;01<br>WK 1</div>
+          <div class="mod-mid">
+            <div class="mod-name">Financial Accounting & the Language of Business</div>
+            <div class="mod-meta">UVA Darden (free audit) &middot; The Great CEO Within</div>
+            <div class="mod-done-def">Build a 3-statement model in Excel &rarr; pass the 5-question quiz &rarr; post on LinkedIn</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> The three financial statements, accrual vs. cash, working capital, the accounting equation.<br><br><strong>Framework:</strong> MECE problem structuring<br><br><strong>Hands-on:</strong> Build a 3-statement model for a fictional SaaS startup (&#8377;50L revenue, 70% gross margin, &#8377;30L burn).</div>
+        <div class="card-text" style="margin-top:12px;"><strong>Quiz (answer before moving on):</strong><ol><li>A startup shows &#8377;1Cr revenue, &#8377;20L profit, negative cash flow. What are the 3 most likely reasons?</li><li>Working capital = ? (Cash &#8377;10L + AR &#8377;40L + Inventory &#8377;20L) &minus; (AP &#8377;15L + Debt &#8377;10L)</li><li>A customer pays &#8377;1.2L upfront for a 12-month subscription. How much revenue lands in January? In June? Where does the rest sit?</li><li>Why is EBITDA a dangerous headline number for early-stage startups?</li><li>A founder shows you an 80% gross margin. What's the one question you ask next?</li></ol></div>
+        <div class="mod-links"><a href="https://www.coursera.org/learn/uva-darden-financial-accounting" target="_blank" rel="noopener">&#8599; Financial Accounting Fundamentals &mdash; UVA Darden / Coursera</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “I built my first P&amp;L from scratch. Here's what I got wrong about gross margin vs. net margin...”</div>
+      </div>
+    </details>
+<details class="module" data-id="mod-02">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;02<br>WK 2</div>
+          <div class="mod-mid">
+            <div class="mod-name">Managerial Economics & Market Dynamics</div>
+            <div class="mod-meta">Khan Academy (free) &middot; The Hard Thing About Hard Things</div>
+            <div class="mod-done-def">Run a break-even analysis on a real startup &rarr; pass the quiz &rarr; post on LinkedIn</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> Break-even analysis, marginal thinking, price elasticity, opportunity cost.<br><br><strong>Framework:</strong> Break-even + marginal thinking<br><br><strong>Hands-on:</strong> Break-even analysis for a real Indian startup (Zepto, Razorpay, Zerodha, or Freshworks).</div>
+        <div class="card-text" style="margin-top:12px;"><strong>Quiz (answer before moving on):</strong><ol><li>Fixed costs &#8377;6L/month. Price &#8377;2,000/unit. Variable cost &#8377;800/unit. What's the break-even volume?</li><li>Price cut to &#8377;1,500. New break-even? What's the % increase in required volume?</li><li>Why does marginal cost matter more than average cost for a “should we take this order” decision?</li><li>A B2B SaaS product costs &#8377;50K/year, CAC &#8377;20K, support cost &#8377;8K. Elastic or inelastic demand? What happens with a 30% discount?</li><li>A founder spends 2 days/week on vendor negotiations, saving &#8377;30K. Their time is worth &#8377;5L/day elsewhere. What's the opportunity cost?</li></ol></div>
+        <div class="mod-links"><a href="https://www.khanacademy.org/economics-finance-domain" target="_blank" rel="noopener">&#8599; Microeconomics &mdash; Khan Academy</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “I ran the break-even math on [Company] this weekend. Most people think they're profitable...”</div>
+      </div>
+    </details>
+<details class="module" data-id="mod-03">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;03<br>WK 3</div>
+          <div class="mod-mid">
+            <div class="mod-name">Operations Management & Process Flow</div>
+            <div class="mod-meta">IIMBx / edX (free) &middot; High Output Management</div>
+            <div class="mod-done-def">Map a real process flow, find the bottleneck, calculate cycle time &rarr; post on LinkedIn</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> Process flow analysis, bottlenecks, cycle time, lean operations, quality control &mdash; this is home turf.<br><br><strong>Framework:</strong> Process flow + bottleneck theory + lean NVA<br><br><strong>Hands-on:</strong> Map the Greenlam plant's process flow. Identify the bottleneck. Calculate cycle time and throughput. Apply NVA analysis.</div>
+        
+        <div class="mod-links"><a href="https://www.edx.org/learn/operations-management/indian-institute-of-management-bangalore-operations-management" target="_blank" rel="noopener">&#8599; Operations Management &mdash; IIMBx / edX</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “4 years in manufacturing and I just learned why I was measuring the wrong thing...”</div>
+      </div>
+    </details>
+<details class="module" data-id="mod-04">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;04<br>WK 4</div>
+          <div class="mod-mid">
+            <div class="mod-name">Business Analytics & Decision Modeling</div>
+            <div class="mod-meta">Wharton / Coursera (free) &middot; High Output Management</div>
+            <div class="mod-done-def">Build a resource-allocation optimizer with a sensitivity table &rarr; post on LinkedIn</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> Optimization, sensitivity analysis, spreadsheet modeling &mdash; being an intelligent builder and consumer of models.<br><br><strong>Framework:</strong> Optimization + sensitivity analysis<br><br><strong>Hands-on:</strong> Build an Excel model for resource allocation (&#8377;10L budget, 3 marketing channels) using Solver.</div>
+        
+        <div class="mod-links"><a href="https://www.coursera.org/learn/wharton-introduction-spreadsheets-models" target="_blank" rel="noopener">&#8599; Intro to Spreadsheets and Models &mdash; Wharton / Coursera</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “I built a marketing budget optimizer in Excel this week...”</div>
+      </div>
+    </details>
+<details class="module" data-id="mod-05">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;05<br>WK 5</div>
+          <div class="mod-mid">
+            <div class="mod-name">Strategy Formulation & Competitive Analysis</div>
+            <div class="mod-meta">UVA Darden (free audit) &middot; The Hard Thing About Hard Things</div>
+            <div class="mod-done-def">Write a 2-page strategy memo with a Five Forces analysis and one issue tree &rarr; post on LinkedIn</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> Porter's Five Forces, competitive advantage, issue trees, MECE, where-to-play / how-to-win.<br><br><strong>Framework:</strong> Porter's Five Forces + issue trees + MECE<br><br><strong>Hands-on:</strong> Write a 2-page strategy memo analyzing one Indian industry (quick commerce, edtech, B2B manufacturing).</div>
+        
+        <div class="mod-links"><a href="https://www.coursera.org/learn/uva-darden-strategy101" target="_blank" rel="noopener">&#8599; Foundations of Business Strategy &mdash; UVA Darden / Coursera</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “I spent this weekend analyzing the quick commerce industry like a consultant would...”</div>
+      </div>
+    </details>
+<div class="term-band"><b>Term 2 &mdash; The operating system</b> &middot; Weeks 6&ndash;10<br>How high-functioning startups actually run day to day &mdash; goals, priorities, communication, projects.</div>
+<details class="module" data-id="mod-06">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;06<br>WK 6</div>
+          <div class="mod-mid">
+            <div class="mod-name">OKRs, EOS & the Execution Cadence</div>
+            <div class="mod-meta">WhatMatters (free) &middot; EOS Worldwide (free) &middot; Traction</div>
+            <div class="mod-done-def">Design 3 Company OKRs + 9 Team OKRs and a 90-minute L10 agenda &rarr; post on LinkedIn</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> OKR architecture, EOS Level 10 meetings, Rocks, the Scorecard, weekly rhythms.<br><br><strong>Framework:</strong> OKR cascade + EOS L10 meeting structure<br><br><strong>Hands-on:</strong> Design a complete OKR + EOS system for a fictional 50-person Series A startup.</div>
+        
+        <div class="mod-links"><a href="https://www.whatmatters.com/resources/okr-templates" target="_blank" rel="noopener">&#8599; OKR templates &mdash; WhatMatters.com (John Doerr)</a><a href="https://www.eosworldwide.com/level-10-meeting" target="_blank" rel="noopener">&#8599; Level 10 Meeting agenda &mdash; EOS Worldwide</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “Most startups don't have an execution problem. They have a translation problem...”</div>
+      </div>
+    </details>
+<details class="module" data-id="mod-07">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;07<br>WK 7</div>
+          <div class="mod-mid">
+            <div class="mod-name">Prioritization & Resource Allocation</div>
+            <div class="mod-meta">RICE &middot; OODA Loop</div>
+            <div class="mod-done-def">Score 3 features with RICE and write a 1-page defense of the ranking &rarr; post on LinkedIn</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> The RICE framework, the OODA Loop, cost of delay, the Eisenhower Matrix for startups.<br><br><strong>Framework:</strong> RICE + OODA Loop + cost of delay<br><br><strong>Hands-on:</strong> Score 3 “war room” features with RICE. Write a 1-page defense of the ranking.</div>
+        
+        <div class="mod-links"><a href="https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/" target="_blank" rel="noopener">&#8599; RICE: simple prioritization &mdash; Intercom (original)</a><a href="https://en.wikipedia.org/wiki/OODA_loop" target="_blank" rel="noopener">&#8599; OODA Loop, explained &mdash; overview</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “I used the RICE framework on my own side project. My 'high impact' feature scored a 2...”</div>
+      </div>
+    </details>
+<details class="module" data-id="mod-08">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;08<br>WK 8</div>
+          <div class="mod-mid">
+            <div class="mod-name">Executive Communication & the Pyramid Principle</div>
+            <div class="mod-meta">The Pyramid Principle &middot; the Amazon 6-pager</div>
+            <div class="mod-done-def">Rewrite the Module 5 memo with SCQA in 1 page + write a 5-minute verbal briefing script &rarr; post</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> SCQA, the Pyramid Principle, 1-page memos, 5-minute updates.<br><br><strong>Framework:</strong> SCQA + Pyramid Principle + 1-page memo<br><br><strong>Hands-on:</strong> Rewrite the Module 5 strategy memo using SCQA. Keep it to 1 page. Write a 5-minute verbal briefing script.</div>
+        
+        <div class="mod-links"><a href="https://www.barbaraminto.com/concept" target="_blank" rel="noopener">&#8599; The Minto Pyramid Principle &mdash; official concept page</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “I used to write 10-page reports. Then I learned that every executive makes decisions in 5 minutes...”</div>
+      </div>
+    </details>
+<details class="module" data-id="mod-09">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;09<br>WK 9</div>
+          <div class="mod-mid">
+            <div class="mod-name">Stakeholder Management & Influence Without Authority</div>
+            <div class="mod-meta">Influence Without Authority &middot; CSA</div>
+            <div class="mod-done-def">Map 15 stakeholders on a power/interest grid + write an influence strategy for 3 blockers &rarr; post</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> Stakeholder mapping, the trust equation, managing up, the six sources of influence.<br><br><strong>Framework:</strong> Stakeholder map + trust equation + exchange model<br><br><strong>Hands-on:</strong> Map 15 stakeholders at Greenlam on a power/interest grid. Write an influence strategy for 3 blockers.</div>
+        
+        <div class="mod-links"><a href="https://www.chiefofstaff.network/" target="_blank" rel="noopener">&#8599; Chief of Staff Network &mdash; stakeholder & influence resources</a><a href="https://www.csa.org/" target="_blank" rel="noopener">&#8599; Chief of Staff Association (CSA)</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “The best operators don't have the most authority. They have the best maps...”</div>
+      </div>
+    </details>
+<details class="module" data-id="mod-10">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;10<br>WK 10</div>
+          <div class="mod-mid">
+            <div class="mod-name">Cross-Functional Project Execution</div>
+            <div class="mod-meta">RACI &middot; decision logs &middot; project charters</div>
+            <div class="mod-done-def">Design a full project charter &mdash; RACI, decision log, risk register, 30-60-90 &rarr; post on LinkedIn</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> RACI, decision logs, project charters, running projects without formal authority.<br><br><strong>Framework:</strong> RACI + decision log + project charter<br><br><strong>Hands-on:</strong> Design a full project charter for a product launch &mdash; RACI, decision log, risk register, 30-60-90 plan.</div>
+        
+        <div class="mod-links"><a href="https://www.atlassian.com/work-management/project-management/raci-chart" target="_blank" rel="noopener">&#8599; RACI chart guide &mdash; Atlassian Team Playbook</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “I used to think project management was Gantt charts. Now I know it's ambiguity removal...”</div>
+      </div>
+    </details>
+<div class="term-band"><b>Term 3 &mdash; The Chief of Staff skillset</b> &middot; Weeks 11&ndash;15<br>The parts of the job that are actually unique to CoS: entry, finance fluency, people, capital, crisis.</div>
+<details class="module" data-id="mod-11">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;11<br>WK 11</div>
+          <div class="mod-mid">
+            <div class="mod-name">The CoS Role & the 90-Day Entry</div>
+            <div class="mod-meta">Chief of Staff (Tyler Parris) &middot; Ask a Chief of Staff</div>
+            <div class="mod-done-def">Write your own 90-day plan for entering a Series A startup as CoS, with 30-60-90 milestones &rarr; post</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> Role archetypes (Gatekeeper, Implementer, Strategist), the 90-day plan, building trust, strategic gatekeeping.<br><br><strong>Framework:</strong> 90-day entry plan + gatekeeping<br><br><strong>Hands-on:</strong> Write your own 90-day plan for entering a Series A startup as Chief of Staff.</div>
+        
+        <div class="mod-links"><a href="https://askachiefofstaff.com/" target="_blank" rel="noopener">&#8599; Ask a Chief of Staff &mdash; community + template library</a><a href="https://www.chiefofstaff.network/resources" target="_blank" rel="noopener">&#8599; Free CoS resources &mdash; Chief of Staff Network</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “If I joined a startup as Chief of Staff tomorrow, I wouldn't touch a single process in week 1...”</div>
+      </div>
+    </details>
+<details class="module" data-id="mod-12">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;12<br>WK 12</div>
+          <div class="mod-mid">
+            <div class="mod-name">Strategic Finance & Startup Metrics</div>
+            <div class="mod-meta">Venture Deals &middot; YC financial model</div>
+            <div class="mod-done-def">Build a 12-month financial forecast with burn rate, runway, CAC, LTV, cap table &rarr; post on LinkedIn</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> Burn rate, runway, CAC, LTV, unit economics, cap tables, valuation basics.<br><br><strong>Framework:</strong> Unit economics + burn/runway + cap table<br><br><strong>Hands-on:</strong> Build a 12-month financial forecast with burn rate, runway, CAC, LTV, and a simple cap table.</div>
+        
+        <div class="mod-links"><a href="https://www.ycombinator.com/library" target="_blank" rel="noopener">&#8599; YC Startup Library &mdash; fundraising & finance guides</a><a href="https://www.ycombinator.com/documents" target="_blank" rel="noopener">&#8599; YC SAFE documents (cap table mechanics)</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “I built a 12-month startup forecast. Here's the month most founders realize they're dead...”</div>
+      </div>
+    </details>
+<details class="module" data-id="mod-13">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;13<br>WK 13</div>
+          <div class="mod-mid">
+            <div class="mod-name">Hiring, People Ops & the A-Method</div>
+            <div class="mod-meta">Who &middot; Google re:Work (free)</div>
+            <div class="mod-done-def">Design a hiring scorecard (5 traits, 5 questions) + a 30-60-90 onboarding plan &rarr; post on LinkedIn</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> A-Method hiring, scorecards, structured interviews, onboarding design.<br><br><strong>Framework:</strong> A-Method scorecard + structured interview + onboarding<br><br><strong>Hands-on:</strong> Design a hiring scorecard for a “Founder's Office Associate” role &mdash; 5 must-have traits, 5 behavioral questions, a 30-60-90 onboarding plan.</div>
+        
+        <div class="mod-links"><a href="https://rework.withgoogle.com/en/" target="_blank" rel="noopener">&#8599; Google re:Work &mdash; free hiring & management research</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “I interviewed 30+ candidates in my last role. 'Culture fit' is the laziest hiring filter...”</div>
+      </div>
+    </details>
+<details class="module" data-id="mod-14">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;14<br>WK 14</div>
+          <div class="mod-mid">
+            <div class="mod-name">Fundraising Literacy & Investor Relations</div>
+            <div class="mod-meta">Venture Deals &middot; YC fundraising guides</div>
+            <div class="mod-done-def">Write a 1-page investor update + a 2-page term sheet summary &rarr; post on LinkedIn</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> Funding stages, term sheets, investor updates, due-diligence prep, the CoS role in fundraising.<br><br><strong>Framework:</strong> Funding stage map + term sheet basics + investor update<br><br><strong>Hands-on:</strong> Write a 1-page investor update and a 2-page term sheet summary.</div>
+        
+        <div class="mod-links"><a href="https://www.ycombinator.com/library" target="_blank" rel="noopener">&#8599; YC Library &mdash; search “startup funding” for the fundraising guide series</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “I read 50 term sheet summaries this week. Here's the one clause that destroys first-time founders...”</div>
+      </div>
+    </details>
+<details class="module" data-id="mod-15">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;15<br>WK 15</div>
+          <div class="mod-mid">
+            <div class="mod-name">Crisis Management & Hard Decisions</div>
+            <div class="mod-meta">The Hard Thing About Hard Things &middot; a16z</div>
+            <div class="mod-done-def">Write a wartime memo with decision criteria + a communication plan and timeline &rarr; post on LinkedIn</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> Peacetime vs. wartime CEO, layoffs, morale during cash crunches, the CoS as the calmest person in the room.<br><br><strong>Framework:</strong> Peacetime vs. wartime + crisis communication plan<br><br><strong>Hands-on:</strong> Write a “wartime memo” for a fictional startup facing a cash crunch (6 months runway, 20 people, cut burn 40%).</div>
+        
+        <div class="mod-links"><a href="https://a16z.com/peacetime-ceo-wartime-ceo/" target="_blank" rel="noopener">&#8599; Peacetime CEO / Wartime CEO &mdash; Ben Horowitz, a16z</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “I used to think good operators avoid crises. Now I know: good operators are built by crises...”</div>
+      </div>
+    </details>
+<div class="term-band"><b>Term 4 &mdash; Integration & specialization</b> &middot; Weeks 16&ndash;20<br>Product sense, automation, governance, a personal OS, and the sprint that turns 19 weeks of proof-of-work into a portfolio.</div>
+<details class="module" data-id="mod-16">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;16<br>WK 16</div>
+          <div class="mod-mid">
+            <div class="mod-name">Product Sense & Customer Discovery</div>
+            <div class="mod-meta">The Mom Test &middot; YC PM guides</div>
+            <div class="mod-done-def">Write a PRD for one war-room feature + interview 3 people using Mom Test questions &rarr; post</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> Product-market fit, the North Star metric, PRD writing, customer discovery.<br><br><strong>Framework:</strong> Mom Test + North Star metric + PRD<br><br><strong>Hands-on:</strong> Write a PRD for one war-room feature. Interview 3 people using Mom Test questions.</div>
+        
+        <div class="mod-links"><a href="https://www.ycombinator.com/library" target="_blank" rel="noopener">&#8599; YC Library &mdash; product & PM guides</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “I shipped 6 solo projects before I understood this: code is cheap, product sense is expensive...”</div>
+      </div>
+    </details>
+<details class="module" data-id="mod-17">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;17<br>WK 17</div>
+          <div class="mod-mid">
+            <div class="mod-name">AI-Enabled Operations & Automation</div>
+            <div class="mod-meta">Zapier / Make &middot; Python &middot; agentic AI</div>
+            <div class="mod-done-def">Audit your weekly tasks, pick 3 to automate, ship 1 workflow that saves 2+ hrs/week &rarr; post</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> The AI stack for operators, prompt engineering, automation, the leverage audit.<br><br><strong>Framework:</strong> Leverage audit + automation decision tree + AI workflow<br><br><strong>Hands-on:</strong> Audit your weekly tasks. Identify 3 to automate. Build one Zapier/Make/Python workflow that saves 2+ hours/week.</div>
+        
+        <div class="mod-links"><a href="https://freeacademy.ai/courses/ai-automations-make-zapier" target="_blank" rel="noopener">&#8599; Free AI automations course &mdash; Make & Zapier, no-code</a><a href="https://zapier.com/" target="_blank" rel="noopener">&#8599; Zapier &mdash; start building</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “I automated 4 hours of my weekly reporting this month. Here's the leverage audit I used...”</div>
+      </div>
+    </details>
+<details class="module" data-id="mod-18">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;18<br>WK 18</div>
+          <div class="mod-mid">
+            <div class="mod-name">Board Governance & Governance Design</div>
+            <div class="mod-meta">The Great CEO Within &middot; YC board templates</div>
+            <div class="mod-done-def">Build a 6-slide board deck + write sample minutes for a 60-minute board meeting &rarr; post</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> Board structure, board deck anatomy, minute-taking, fiduciary duty.<br><br><strong>Framework:</strong> Board deck structure + minute-taking + governance<br><br><strong>Hands-on:</strong> Build a 6-slide board deck. Write sample minutes for a 60-minute board meeting.</div>
+        
+        <div class="mod-links"><a href="https://www.ycombinator.com/library" target="_blank" rel="noopener">&#8599; YC Library &mdash; board & governance guides</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “I built my first board deck this week. Most startup board meetings are a waste of time...”</div>
+      </div>
+    </details>
+<details class="module" data-id="mod-19">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;19<br>WK 19</div>
+          <div class="mod-mid">
+            <div class="mod-name">The Personal Operating System</div>
+            <div class="mod-meta">The Great CEO Within &middot; Managing Up &middot; Second Brain</div>
+            <div class="mod-done-def">Build a Notion personal OS (calendar, dashboard, decision log) + a batching protocol &rarr; post</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> Calendar architecture, the full-calendar method, email/Slack protocols, decision types, a second brain.<br><br><strong>Framework:</strong> Calendar architecture + decision types + second brain<br><br><strong>Hands-on:</strong> Design a personal operating system in Notion &mdash; calendar template, project dashboard, decision log, reading list, meeting notes database.</div>
+        
+        <div class="mod-links"><a href="https://www.buildingasecondbrain.com/" target="_blank" rel="noopener">&#8599; Building a Second Brain &mdash; Tiago Forte</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “I rebuilt my calendar this week. 90% of operators are reactive because their calendar is a graveyard...”</div>
+      </div>
+    </details>
+<details class="module" data-id="mod-20">
+      <summary>
+        <div class="mod-row">
+          <div class="mod-check" onclick="event.preventDefault(); event.stopPropagation(); toggleModule(this.closest('.module'));">&#10003;</div>
+          <div class="mod-num">MOD&middot;20<br>WK 20</div>
+          <div class="mod-mid">
+            <div class="mod-name">Portfolio Sprint & Role Positioning</div>
+            <div class="mod-meta">Founder's Office Fellowship &middot; mock interviews</div>
+            <div class="mod-done-def">Compile the full Nova Portfolio (all 19 deliverables) + 1 recorded mock case interview &rarr; post final</div>
+          </div>
+          <div class="mod-arrow">&#9662;</div>
+        </div>
+      </summary>
+      <div class="mod-detail">
+        <div class="card-text"><strong>What you learn:</strong> Portfolio compilation, resume transformation, narrative building, interview prep, compensation negotiation.<br><br><strong>Framework:</strong> Portfolio architecture + outcome-based resume + narrative arc<br><br><strong>Hands-on:</strong> Compile the Nova Portfolio in Notion. Rewrite the LinkedIn About section. Do one recorded mock case interview.</div>
+        
+        <div class="mod-links"><a href="https://www.foundersofficefellowship.com/" target="_blank" rel="noopener">&#8599; Founder's Office Fellowship &mdash; positioning program</a></div>
+        <div class="li-prompt">&#128172; LinkedIn draft &mdash; “I spent 20 weeks building this. It's not a resume. It's proof of work...”</div>
+      </div>
+    </details></div><div class="tabpanel" id="tab-resources"><div class="phase-head">
+    <div class="phase-eyebrow"><span class="n">02</span>Reference</div>
+    <div class="phase-title">Resource Library</div>
+    <div class="phase-desc">Courses, books, communities, certifications, templates &mdash; everything, verified live.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">&#128218; The resource library</div>
+    <div class="card-text">Every course, book, community, certification, template, and data source behind the 20-week build &mdash; checked live, not guessed. Cash outlay: &#8377;4,000&ndash;6,000 in books. Everything else here is free.</div>
+  </div>
+
+  <div class="sub-title" id="res-courses">Free courses <span class="count">verified live</span></div>
+  <div class="card"><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.coursera.org/learn/uva-darden-financial-accounting" target="_blank" rel="noopener">Financial Accounting Fundamentals &#8599;</a><span class="badge b-free">Free audit</span></div>
+        <div class="res-desc">UVA Darden School of Business, on Coursera. The three statements, from first principles.</div>
+        <div class="res-meta">Module 1</div>
+      </div>
+    </div><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.coursera.org/learn/uva-darden-managerial-accounting" target="_blank" rel="noopener">Managerial Accounting Fundamentals &#8599;</a><span class="badge b-free">Free audit</span></div>
+        <div class="res-desc">UVA Darden's follow-up course &mdash; cost behavior, cost-volume-profit analysis.</div>
+        <div class="res-meta">Modules 1&ndash;2</div>
+      </div>
+    </div><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.khanacademy.org/economics-finance-domain" target="_blank" rel="noopener">Microeconomics &#8599;</a><span class="badge b-free">Free</span></div>
+        <div class="res-desc">Khan Academy &mdash; elasticity, marginal cost, opportunity cost, at your own pace.</div>
+        <div class="res-meta">Module 2</div>
+      </div>
+    </div><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.edx.org/learn/operations-management/indian-institute-of-management-bangalore-operations-management" target="_blank" rel="noopener">Operations Management &#8599;</a><span class="badge b-free">Free audit</span></div>
+        <div class="res-desc">IIM Bangalore (IIMBx), on edX. Capacity, productivity, quality, supply chain &mdash; taught by B. Mahadevan.</div>
+        <div class="res-meta">Module 3</div>
+      </div>
+    </div><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.coursera.org/learn/wharton-introduction-spreadsheets-models" target="_blank" rel="noopener">Introduction to Spreadsheets and Models &#8599;</a><span class="badge b-free">Free audit</span></div>
+        <div class="res-desc">Wharton, on Coursera. Part of the Business and Financial Modeling specialization.</div>
+        <div class="res-meta">Module 4</div>
+      </div>
+    </div><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.coursera.org/learn/uva-darden-strategy101" target="_blank" rel="noopener">Foundations of Business Strategy &#8599;</a><span class="badge b-free">Free audit</span></div>
+        <div class="res-desc">UVA Darden. SWOT, Five Forces, competitor and environmental analysis, strategy maps.</div>
+        <div class="res-meta">Module 5</div>
+      </div>
+    </div><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://mode.com/sql-tutorial/" target="_blank" rel="noopener">SQL Tutorial &#8599;</a><span class="badge b-free">Free</span></div>
+        <div class="res-desc">Mode Analytics. The most commonly recommended zero-to-intermediate SQL path for analysts &mdash; real practice datasets.</div>
+        <div class="res-meta">Weekly rhythm, all terms</div>
+      </div>
+    </div><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://chandoo.org/" target="_blank" rel="noopener">Chandoo.org &mdash; Excel & dashboards &#8599;</a><span class="badge b-free">Free</span></div>
+        <div class="res-desc">500+ tutorials and downloadable workbooks; the YouTube channel posts weekly. Best single source for Excel dashboard-building.</div>
+        <div class="res-meta">Weekly rhythm, all terms</div>
+      </div>
+    </div><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://rework.withgoogle.com/en/" target="_blank" rel="noopener">Google re:Work &#8599;</a><span class="badge b-free">Free</span></div>
+        <div class="res-desc">Google's public research on hiring, OKRs, manager effectiveness, and team performance.</div>
+        <div class="res-meta">Module 13</div>
+      </div>
+    </div><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://freeacademy.ai/courses/ai-automations-make-zapier" target="_blank" rel="noopener">Free AI Automations with Make & Zapier &#8599;</a><span class="badge b-free">Free</span></div>
+        <div class="res-desc">No-code course: connect ChatGPT/Claude to Make and Zapier, build multi-step workflows, no signup required.</div>
+        <div class="res-meta">Module 17</div>
+      </div>
+    </div></div>
+
+  <div class="sub-title" id="res-frameworks">Frameworks & mental models <span class="count">the "search for X" gaps, filled</span></div>
+  <div class="card"><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers/" target="_blank" rel="noopener">RICE: simple prioritization for product managers &#8599;</a><span class="badge b-free">Reference</span></div>
+        <div class="res-desc">The original Intercom post that introduced Reach &times; Impact &times; Confidence / Effort.</div>
+        <div class="res-meta">Module 7</div>
+      </div>
+    </div><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://en.wikipedia.org/wiki/OODA_loop" target="_blank" rel="noopener">OODA Loop, explained &#8599;</a><span class="badge b-free">Reference</span></div>
+        <div class="res-desc">Observe&ndash;Orient&ndash;Decide&ndash;Act &mdash; the decision cycle for moving faster than the competition.</div>
+        <div class="res-meta">Module 7</div>
+      </div>
+    </div><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.barbaraminto.com/concept" target="_blank" rel="noopener">The Minto Pyramid Principle &mdash; concept overview &#8599;</a><span class="badge b-free">Reference</span></div>
+        <div class="res-desc">Official summary from Minto's own site: structure your thinking before you write a word.</div>
+        <div class="res-meta">Module 8</div>
+      </div>
+    </div><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://a16z.com/peacetime-ceo-wartime-ceo/" target="_blank" rel="noopener">Peacetime CEO / Wartime CEO &#8599;</a><span class="badge b-free">Reference</span></div>
+        <div class="res-desc">Ben Horowitz's original essay &mdash; the source of the framework behind Module 15.</div>
+        <div class="res-meta">Module 15</div>
+      </div>
+    </div><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.buildingasecondbrain.com/" target="_blank" rel="noopener">Building a Second Brain &#8599;</a><span class="badge b-free">Reference</span></div>
+        <div class="res-desc">Tiago Forte's method for an external, searchable memory system &mdash; feeds directly into Module 19.</div>
+        <div class="res-meta">Module 19</div>
+      </div>
+    </div></div>
+
+  <div class="sub-title" id="res-books">Books <span class="count">&#8377;4,000&ndash;6,000 total</span></div>
+  <div class="card">
+    <div class="tbl-wrap"><table class="tbl"><tr><th>Book</th><th>Author</th><th>Cost</th><th>Used in</th></tr><tr><td><strong>The Great CEO Within</strong></td><td>Matt Mochary</td><td>&#8377;500&ndash;800</td><td>Modules 6, 11, 14, 18, 19</td></tr><tr><td><strong>Traction</strong></td><td>Gino Wickman</td><td>&#8377;400&ndash;600</td><td>Module 6</td></tr><tr><td><strong>The Pyramid Principle</strong></td><td>Barbara Minto</td><td>&#8377;600&ndash;900</td><td>Module 8</td></tr><tr><td><strong>Influence Without Authority</strong></td><td>Cohen & Bradford</td><td>Free summary</td><td>Module 9</td></tr><tr><td><strong>Chief of Staff</strong></td><td>Tyler Parris</td><td>&#8377;400&ndash;600</td><td>Module 11</td></tr><tr><td><strong>Venture Deals</strong></td><td>Feld & Mendelson</td><td>&#8377;700&ndash;1,000</td><td>Modules 12, 14</td></tr><tr><td><strong>Who</strong></td><td>Smart & Street</td><td>&#8377;500&ndash;700</td><td>Module 13</td></tr><tr><td><strong>The Hard Thing About Hard Things</strong></td><td>Ben Horowitz</td><td>&#8377;600&ndash;900</td><td>Module 15</td></tr><tr><td><strong>The Mom Test</strong></td><td>Rob Fitzpatrick</td><td>&#8377;400&ndash;600</td><td>Module 16</td></tr><tr><td><strong>High Output Management</strong></td><td>Andrew Grove</td><td>&#8377;500&ndash;700</td><td>Modules 3, 4</td></tr><tr><td><strong>Building a Second Brain</strong></td><td>Tiago Forte</td><td>&#8377;500&ndash;700</td><td>Module 19</td></tr><tr><td><strong>Managing Up</strong></td><td>Rosanne Badowski</td><td>Free summary</td><td>Module 19</td></tr></table></div>
+    <div style="margin-top:8px; font-family:var(--font-mono); font-size:0.72rem; color:var(--ink-mute);">The Great CEO Within originally circulated as a free Google Doc before publication &mdash; worth a search before buying.</div>
+  </div>
+
+  <div class="sub-title" id="res-community">Communities <span class="count">where CoS operators talk</span></div>
+  <div class="card"><div class="res community">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.chiefofstaff.network/" target="_blank" rel="noopener">Chief of Staff Network &#8599;</a><span class="badge b-free">Free tier</span></div>
+        <div class="res-desc">Newsletter, podcast, and a free community tier for aspiring and current CoS operators &mdash; job board included.</div>
+        <div class="res-meta">Since 2017</div>
+      </div>
+    </div><div class="res community">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://askachiefofstaff.com/" target="_blank" rel="noopener">Ask a Chief of Staff &#8599;</a><span class="badge b-member">Membership</span></div>
+        <div class="res-desc">Video archive, template library, Slack community. Separate aspiring / current-CoS membership tiers.</div>
+        <div class="res-meta">Peer community</div>
+      </div>
+    </div><div class="res community">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.csa.org/" target="_blank" rel="noopener">Chief of Staff Association (CSA) &#8599;</a><span class="badge b-member">Membership</span></div>
+        <div class="res-desc">The largest global CoS membership body &mdash; 75+ countries. Runs the Certified Chief of Staff&reg; credential and executive-ed programmes with Oxford, Harvard Business School and SDA Bocconi.</div>
+        <div class="res-meta">Global, capped intake</div>
+      </div>
+    </div><div class="res community">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.chiefofstaffroundtable.com/" target="_blank" rel="noopener">Chief of Staff Roundtable &#8599;</a><span class="badge b-member">Membership</span></div>
+        <div class="res-desc">Weekly facilitated roundtables on live situations members are navigating right now.</div>
+        <div class="res-meta">Peer coaching</div>
+      </div>
+    </div><div class="res community">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://chiefofstaffconnect.com/" target="_blank" rel="noopener">Chief of Staff Connect &#8599;</a><span class="badge b-member">Events</span></div>
+        <div class="res-desc">Annual conference series (SF, NYC, London and more) run by the Chief of Staff Network &mdash; a good target to attend or watch talks from once the LinkedIn presence is live.</div>
+        <div class="res-meta">In-person / hybrid</div>
+      </div>
+    </div></div>
+
+  <div class="sub-title" id="res-certs">Certification programs <span class="count">optional, mostly post-Jump-1</span></div>
+  <div class="card"><div class="res paid">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.foundersofficefellowship.com/" target="_blank" rel="noopener">Founder's Office Fellowship &#8599;</a><span class="badge b-paid">Selective</span></div>
+        <div class="res-desc">A positioning-and-application program specifically for breaking into Founder's Office / CoS / EIR roles &mdash; narrative building, resume transformation, interview prep.</div>
+        <div class="res-meta">Used in Module 20</div>
+      </div>
+    </div><div class="res paid">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.csa.org/" target="_blank" rel="noopener">Certified Chief of Staff&reg; &mdash; CSA &#8599;</a><span class="badge b-paid">Paid</span></div>
+        <div class="res-desc">The credential run by the Chief of Staff Association, with executive-ed tie-ins at Oxford and Harvard Business School.</div>
+        <div class="res-meta">Aspirational, post-Jump-2</div>
+      </div>
+    </div><div class="res paid">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.novachiefofstaff.com/certification" target="_blank" rel="noopener">Nova Chief of Staff Certification &#8599;</a><span class="badge b-paid">Paid</span></div>
+        <div class="res-desc">Self-paced certification course with templates, live touchpoints and an EA/CoS-specific curriculum.</div>
+        <div class="res-meta">Optional, no relation to this tracker's name</div>
+      </div>
+    </div><div class="res paid">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://elevationchiefofstaff.com/" target="_blank" rel="noopener">Elevation Chief of Staff Certificate &#8599;</a><span class="badge b-paid">Paid</span></div>
+        <div class="res-desc">A shorter (4-week) self-paced certificate program with community support.</div>
+        <div class="res-meta">Optional</div>
+      </div>
+    </div></div>
+
+  <div class="sub-title" id="res-templates">Templates & tools <span class="count">free, ready to copy</span></div>
+  <div class="card"><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.whatmatters.com/resources/okr-templates" target="_blank" rel="noopener">OKR templates &#8599;</a><span class="badge b-free">Free</span></div>
+        <div class="res-desc">John Doerr's WhatMatters.com &mdash; worksheet, tracker, best-practices checklist, Google's own OKR playbook.</div>
+        <div class="res-meta">Module 6</div>
+      </div>
+    </div><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.eosworldwide.com/level-10-meeting" target="_blank" rel="noopener">Level 10 Meeting agenda &#8599;</a><span class="badge b-free">Free</span></div>
+        <div class="res-desc">The exact 90-minute weekly leadership meeting format from Traction, as a free download.</div>
+        <div class="res-meta">Module 6</div>
+      </div>
+    </div><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.atlassian.com/work-management/project-management/raci-chart" target="_blank" rel="noopener">RACI chart guide &#8599;</a><span class="badge b-free">Free</span></div>
+        <div class="res-desc">Atlassian's Team Playbook &mdash; how to build one plus a downloadable template structure.</div>
+        <div class="res-meta">Module 10</div>
+      </div>
+    </div><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.ycombinator.com/library" target="_blank" rel="noopener">YC Startup Library &#8599;</a><span class="badge b-free">Free</span></div>
+        <div class="res-desc">Fundraising, financial modeling, board decks, product &mdash; YC's own free knowledge base.</div>
+        <div class="res-meta">Modules 12, 14, 16, 18</div>
+      </div>
+    </div><div class="res free">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.ycombinator.com/documents" target="_blank" rel="noopener">YC SAFE financing documents &#8599;</a><span class="badge b-free">Free</span></div>
+        <div class="res-desc">The standard early-stage fundraising instrument, plus a plain-English guide to how cap tables actually move.</div>
+        <div class="res-meta">Module 12</div>
+      </div>
+    </div></div>
+
+  <div class="sub-title" id="res-news">Newsletters & reading</div>
+  <div class="card"><div class="res community">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.chiefofstaff.network/resources" target="_blank" rel="noopener">Chief of Staff Network &mdash; free resources hub &#8599;</a></div>
+        <div class="res-desc">Reports, guides, and a weekly newsletter &mdash; leveling frameworks and comp survey data included.</div>
+        
+      </div>
+    </div><div class="res community">
+      <div class="res-tag"></div>
+      <div class="res-body">
+        <div class="res-title"><a href="https://www.whatmatters.com/" target="_blank" rel="noopener">WhatMatters.com &#8599;</a></div>
+        <div class="res-desc">John Doerr's OKR home base &mdash; examples, a free training course, and a newsletter.</div>
+        
+      </div>
+    </div></div>
+
+  <div class="sub-title" id="res-pay">Pay benchmarks <span class="count">4 sources, cross-checked</span></div>
+  <div class="card">
+    <div class="tbl-wrap"><table class="tbl"><tr><th>Source</th><th>Chief of Staff, India</th><th>Note</th></tr><tr><td><a href="https://www.glassdoor.co.in/Salaries/chief-of-staff-salary-SRCH_KO0,14.htm" target="_blank" rel="noopener">Glassdoor</a></td><td>&#8377;13.75L&ndash;&#8377;35.9L (25th&ndash;75th pct); up to &#8377;65.8L at 90th</td><td>239 self-reported salaries</td></tr><tr><td><a href="https://www.levels.fyi/t/chief-of-staff/locations/india" target="_blank" rel="noopener">Levels.fyi</a></td><td>&#8377;36.5L&ndash;&#8377;67L, avg &#8377;46.5L total comp</td><td>Smaller sample, skews senior / funded</td></tr><tr><td><a href="https://www.payscale.com/research/IN/Job=Chief_of_Staff/Salary" target="_blank" rel="noopener">PayScale</a></td><td>~&#8377;19.7L average</td><td>Broad title-match, mid-weighted</td></tr><tr><td><a href="https://in.indeed.com/career/chief-of-staff/salaries" target="_blank" rel="noopener">Indeed</a></td><td>~&#8377;7.1L average</td><td>Broadest title-match, skews junior / non-startup</td></tr></table></div>
+    <div style="margin-top:8px; font-size:0.85rem; color:var(--ink-dim);">Reading across all four: junior CoS and BizOps-adjacent titles cluster well under &#8377;15L; the &#8377;36&ndash;50L range is real but sits at the 75th&ndash;90th percentile &mdash; a Jump 3 outcome after real scope, not an entry number.</div>
+  </div></div><div class="tabpanel" id="tab-playbook"><div class="phase-head">
+    <div class="phase-eyebrow"><span class="n">03</span>LinkedIn</div>
+    <div class="phase-title">The Playbook</div>
+    <div class="phase-desc">Copy-paste assets and the one-time profile setup checklist.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">&#129513; What's in here</div>
+    <div class="card-text">Every copy-paste asset for a LinkedIn presence that pulls recruiters and founders toward you &mdash; profile copy, post templates, outreach scripts, and the 2026 rules of the platform's algorithm.</div>
+  </div>
+
+  <div class="sub-title">Profile copy</div>
+  <div class="card"><div class="card-title">&#128203; Headline</div><div class="copy-box"><pre id="raw-headline">Operations Analyst | Excel, SQL, Process Automation | Manufacturing &rarr; Startup Operations | Building systems that scale</pre><button class="copy-btn" onclick="copyText(this)">COPY</button></div></div>
+  <div class="card"><div class="card-title">&#128214; About section</div><div class="copy-box"><pre id="raw-about">I turn operational chaos into clean data systems.
+
+At Greenlam Industries, I stepped into a 1,100-person plant with zero dashboards, zero documentation, and zero reporting structure. I built 4 recurring Excel reports that leadership now reviews weekly, became the go-to for QA/QC data requests, and built an automated cross-check that cut reporting errors by 60&ndash;70%.
+
+Before that, I delivered 6 client projects end-to-end at Symstech &mdash; including a manufacturing ERP system, a payment gateway fix that cut failures from 20% to 0.5%, and SQL refactoring that brought a government portal's processing time from seconds to milliseconds.
+
+The common thread: I enjoy messy situations, figure out what's broken, and build systems that make work easier.
+
+Now I'm bringing that operational rigor to high-growth startups. I'm looking for Business Operations, Data Analytics, or Founder's Office roles where speed, ownership, and cross-functional execution matter.
+
+If that sounds like your team, let's talk.
+&#128231; asis-sharma@outlook.com
+&#128187; github.com/asissharma
+&#128202; [Portfolio link &mdash; add after Day 3]</pre><button class="copy-btn" onclick="copyText(this)">COPY</button></div></div>
+
+  <div class="sub-title">Post templates &middot; rotate through the week</div>
+  <div class="card"><div class="card-title">&#9997;&#65039; Tuesday &mdash; Insight drop</div><div class="copy-box"><pre id="raw-tue">Most startups don't die from bad ideas. They die from decision debt.
+
+Every "let's discuss this later" becomes a bottleneck. Every undocumented process becomes a silent tax. Every dashboard that takes 3 days to build becomes stale before it ships.
+
+I spent 4 years in manufacturing watching this happen. Now I'm building systems that prevent it.
+
+What's the biggest operational debt you've seen at your company?
+
+#StartupOperations #BusinessOperations #ProcessImprovement</pre><button class="copy-btn" onclick="copyText(this)">COPY</button></div></div>
+  <div class="card"><div class="card-title">&#9997;&#65039; Wednesday &mdash; Framework</div><div class="copy-box"><pre id="raw-wed">I learned the RICE framework this week.
+
+Reach &times; Impact &times; Confidence / Effort
+
+Most people lie about "Impact." They score their own idea a 5 because they built it.
+
+The honest way: ask "If this works perfectly, what metric moves and by how much?" If you can't answer, it's not a 5. It's a 2.
+
+I used this on my own side project. My "high impact" feature scored a 2. Brutal. Accurate.
+
+How do you prioritize when everything feels urgent?
+
+#Prioritization #StartupOperations #RICE</pre><button class="copy-btn" onclick="copyText(this)">COPY</button></div></div>
+  <div class="card"><div class="card-title">&#9997;&#65039; Thursday &mdash; Honest journey</div><div class="copy-box"><pre id="raw-thu">I used to think I was behind.
+
+No IIT. No tier-1 college. No FAANG on my resume. Just a BCA from IGNOU and a lot of late nights.
+
+Then I realized: the people who hire for operations don't care where you went to school. They care if you can fix the broken thing before Monday.
+
+I built 4 reports from zero documentation. I cut errors by 70%. I shipped 6 client projects solo.
+
+Not because I'm special. Because I showed up when it was messy.
+
+If you're building without a blueprint, you're not lost. You're building the blueprint.
+
+What's something you built from nothing?
+
+#CareerChange #Operations #NonLinearCareer</pre><button class="copy-btn" onclick="copyText(this)">COPY</button></div></div>
+  <div class="card"><div class="card-title">&#9997;&#65039; Friday &mdash; Question</div><div class="copy-box"><pre id="raw-fri">What's the most broken operational process at your startup?
+
+I'll go first: the handoff between sales and onboarding. The salesperson promises the moon. The onboarding team gets a sticky note. Chaos ensues.
+
+What's yours? Drop it below. I'll try to suggest a fix.
+
+#StartupOperations #ProcessImprovement #FoundersOffice</pre><button class="copy-btn" onclick="copyText(this)">COPY</button></div></div>
+
+  <div class="sub-title">Outreach scripts</div>
+  <div class="card"><div class="card-title">&#128172; Connection request</div><div class="copy-box"><pre id="raw-conn">Hi [Name], I came across your profile while researching startup operations roles. I have 4 years of building operational reporting systems in manufacturing (SQL, Excel, process automation) and I'm transitioning into startup operations. I've been following [Company] and your work on [specific thing] stood out. Would love to connect and learn from your experience.</pre><button class="copy-btn" onclick="copyText(this)">COPY</button></div></div>
+  <div class="card"><div class="card-title">&#128231; Application cover note</div><div class="copy-box"><pre id="raw-cover">I noticed you're hiring for [Role] at [Company]. I have 4 years of building operational reporting systems in a 1,100-person manufacturing plant &mdash; SQL, Excel automation, cross-functional reporting. I cut quality errors by 70% with an automated validation pipeline. I also build software (Next.js, Python), which means I can automate workflows beyond spreadsheets. I'd love to discuss how I can help [Company] build operational rigor as you scale. My portfolio: [Notion link after Day 3].</pre><button class="copy-btn" onclick="copyText(this)">COPY</button></div></div>
+
+  <div class="sub-title">System & rules</div>
+  <div class="card">
+    <div class="card-title">&#128202; 7 post formats to rotate</div>
+    <div class="card-text"><div class="tbl-wrap"><table class="tbl"><tr><th>Format</th><th>When to use</th></tr><tr><td>Insight drop</td><td>One sharp idea, no fluff. Teach something counter-intuitive.</td></tr><tr><td>Myth buster</td><td>Debunk a common belief. \u201cYou don't need X to do Y.\u201d</td></tr><tr><td>Framework post</td><td>Teach a framework simply &mdash; RICE, OKRs, MECE, etc.</td></tr><tr><td>Honest journey</td><td>Vulnerability + lesson. The non-linear path.</td></tr><tr><td>Comparison</td><td>Manufacturing vs. startup ops &mdash; what transfers, what doesn't.</td></tr><tr><td>Observation</td><td>A pattern noticed. \u201cEvery founder I've met this month...\u201d</td></tr><tr><td>Question post</td><td>Invite comments. \u201cWhat's the most broken process at your company?\u201d</td></tr></table></div></div>
+  </div>
+  <div class="card">
+    <div class="card-title">&#129504; 2026 algorithm rules &mdash; what actually changed</div>
+    <div class="card-text">LinkedIn's feed model now optimizes for depth and dwell time over raw virality, and is noticeably harder on content that looks AI-generated or engagement-baited:
+      <ul>
+        <li><strong>Post 2&ndash;5&times;/week</strong>, not daily &mdash; accounts posting 2+ times a day see reach drop 40%+</li>
+        <li><strong>2&ndash;4 hashtags max</strong> &mdash; 10+ now cuts reach by roughly a third</li>
+        <li><strong>First 2 lines carry the post</strong> &mdash; everything after "see more" needs to earn the click</li>
+        <li><strong>Comments of 15+ words</strong> carry ~2.5&times; the algorithmic weight of a short one</li>
+        <li><strong>Reply fast and often</strong> &mdash; dwell time and conversation depth outweigh likes</li>
+        <li><strong>No engagement pods</strong> &mdash; coordinated engagement gets detected and penalized</li>
+        <li>Sweet spot for B2B visibility: <strong>Tue&ndash;Thu, 9&ndash;11 AM</strong>, first 90 minutes matter most</li>
+      </ul>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-title">&#128221; Content rules</div>
+    <div class="card-text">
+      <ul>
+        <li>Post <strong>3&ndash;4&times;/week</strong> (Tue&ndash;Fri)</li>
+        <li><strong>40%</strong> learning in public &middot; <strong>30%</strong> industry observations &middot; <strong>20%</strong> personal narrative &middot; <strong>10%</strong> engagement</li>
+        <li>Use line breaks like a copywriter</li>
+        <li><strong>Never</strong> put external links in the post body &mdash; first comment instead</li>
+        <li>End with a question that drives comments</li>
+        <li>Reply to every comment within 60&ndash;90 minutes with a real answer</li>
+        <li>15 min/day commenting on founders', operators', and VCs' posts</li>
+        <li>5&ndash;10 new connections/week in target roles</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">&#128279; LinkedIn profile checklist</div>
+    <div class="task-list"><div class="task done" data-id="li-profile-1" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Headline updated to Operations Analyst focus</div></div>
+    </div><div class="task done" data-id="li-profile-2" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">About section rewritten with a CTA</div></div>
+    </div><div class="task done" data-id="li-profile-3" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Skills reordered (Business Operations, Data Analytics, SQL top 3)</div></div>
+    </div><div class="task done" data-id="li-profile-4" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">“Open to Work” changed to “Everyone on LinkedIn”</div></div>
+    </div><div class="task" data-id="li-profile-5" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Job titles in Open to Work updated (remove Web Dev, add Operations titles)</div></div>
+    </div><div class="task" data-id="li-profile-6" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Locations in Open to Work fixed (Bangalore, Mumbai, Delhi, Remote)</div></div>
+    </div><div class="task" data-id="li-profile-7" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Banner uploaded (dark navy with white text)</div></div>
+    </div><div class="task" data-id="li-profile-8" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Greenlam title updated: “Assistant Supervisor, QA/QC &mdash; Data & Operations”</div></div>
+    </div><div class="task" data-id="li-profile-9" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Featured section: pin best post + resume PDF + GitHub</div></div>
+    </div><div class="task" data-id="li-profile-10" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Employment type: Full-time + Contract (remove Internship)</div></div>
+    </div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">&#127919; Connection targeting &mdash; 5/day</div>
+    <div class="card-text"><ol>
+      <li>Founders of Series A/B startups in India</li>
+      <li>Chiefs of Staff at high-growth startups</li>
+      <li>VCs who write about operations</li>
+      <li>COOs / VP Ops at target companies</li>
+      <li>Recruiters specializing in startup ops</li>
+    </ol>Message template: Outreach scripts above.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">&#128202; Weekly metrics targets</div>
+    <div class="card-text"><div class="tbl-wrap"><table class="tbl"><tr><th>Metric</th><th>Week 1</th><th>Week 4</th></tr><tr><td>Posts</td><td>4</td><td>12&ndash;16</td></tr><tr><td>Profile views (7d)</td><td>150+</td><td>500+</td></tr><tr><td>New connections</td><td>35</td><td>100+</td></tr><tr><td>Comments posted</td><td>35</td><td>100+</td></tr><tr><td>Post impressions</td><td>5,000+</td><td>20,000+</td></tr><tr><td>Inbound DMs</td><td>0&ndash;2</td><td>5&ndash;10</td></tr></table></div></div>
+  </div></div><div class="tabpanel" id="tab-jobs"><div class="phase-head">
+    <div class="phase-eyebrow"><span class="n">04</span>Applications</div>
+    <div class="phase-title">Job Tracker</div>
+    <div class="phase-desc">Live links over stale lists, a log that's just names and ticks.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">&#127919; Live search, not a stale snapshot</div>
+    <div class="card-text">A hard-coded "hiring this month" list goes stale in weeks. These links don't &mdash; they query YC's board live, every time you open them.</div>
+    <div class="btn-row"><a class="btn btn-ghost" href="https://www.ycombinator.com/companies/location/india/hiring" target="_blank" rel="noopener">&#8599; YC India &mdash; companies hiring right now</a><a class="btn btn-ghost" href="https://www.ycombinator.com/jobs/role/operations/india" target="_blank" rel="noopener">&#8599; YC Jobs &mdash; Operations roles, India</a><a class="btn btn-ghost" href="https://www.workatastartup.com" target="_blank" rel="noopener">&#8599; Work at a Startup &mdash; full board</a></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">&#9989; Get set up</div>
+    <div class="task-list"><div class="task" data-id="jobs-setup-1" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Bookmark the YC India live-hiring page</div><div class="t-sub">Refreshes weekly &mdash; better than any static list</div></div>
+    </div><div class="task" data-id="jobs-setup-2" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Set saved-search alerts on Wellfound, LinkedIn & Instahyre</div><div class="t-sub">Titles + locations below</div></div>
+    </div><div class="task" data-id="jobs-setup-3" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Create a Work at a Startup profile</div><div class="t-sub">Founders reach out directly &mdash; free</div></div>
+    </div></div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">&#128269; Illustrative fits &mdash; check live headcount before applying</div>
+    <div class="card-text">Why these specific YC India companies suit the manufacturing-ops wedge:</div>
+    <div class="tbl-wrap"><table class="tbl"><tr><th>Company</th><th>Why it fits</th><th>Batch</th></tr><tr><td><strong>Raven</strong></td><td>AI assistants for manufacturing plants &mdash; training, job planning, troubleshooting. This is almost literally the Greenlam floor, digitized.</td><td>S2022</td></tr><tr><td><strong>Material Depot</strong></td><td>Manufacturer-to-customer supply chain for building materials &mdash; deep operations + logistics need.</td><td>W2022</td></tr><tr><td><strong>Landeed</strong></td><td>Property data infrastructure at national scale &mdash; heavy data-quality and process-verification work.</td><td>S2022</td></tr><tr><td><strong>Peoplebox.ai</strong></td><td>Runs OKRs, goals, and performance review cycles for 500+ companies &mdash; a direct line into the OKR/EOS skill from Module 6.</td><td>S2022</td></tr><tr><td><strong>DrDroid</strong></td><td>AI agents that automate on-call operations for engineering teams &mdash; automation + ops intersection.</td><td>W2023</td></tr><tr><td><strong>Karbon Card / Cashfree / GroMo</strong></td><td>Fintech operations at scale &mdash; all hire ops/BizOps generalists regularly.</td><td>Various</td></tr></table></div>
+  </div>
+
+  <div class="sub-title">Application log <span class="count">tick when applied, add your own below</span></div>
+  <div class="card">
+    <div class="task-list"><div class="task" data-id="jobs-apply-raven" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Applied to <strong>Raven</strong></div><div class="t-sub">AI assistants for manufacturing plants &mdash; training, job planning, troubleshooting. This is almost literally the Greenlam floor, digitized.</div></div>
+    </div><div class="task" data-id="jobs-apply-material-depot" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Applied to <strong>Material Depot</strong></div><div class="t-sub">Manufacturer-to-customer supply chain for building materials &mdash; deep operations + logistics need.</div></div>
+    </div><div class="task" data-id="jobs-apply-landeed" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Applied to <strong>Landeed</strong></div><div class="t-sub">Property data infrastructure at national scale &mdash; heavy data-quality and process-verification work.</div></div>
+    </div><div class="task" data-id="jobs-apply-peoplebox.ai" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Applied to <strong>Peoplebox.ai</strong></div><div class="t-sub">Runs OKRs, goals, and performance review cycles for 500+ companies &mdash; a direct line into the OKR/EOS skill from Module 6.</div></div>
+    </div><div class="task" data-id="jobs-apply-drdroid" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Applied to <strong>DrDroid</strong></div><div class="t-sub">AI agents that automate on-call operations for engineering teams &mdash; automation + ops intersection.</div></div>
+    </div><div class="task" data-id="jobs-apply-karbon-card---cashfree---gromo" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">Applied to <strong>Karbon Card / Cashfree / GroMo</strong></div><div class="t-sub">Fintech operations at scale &mdash; all hire ops/BizOps generalists regularly.</div></div>
+    </div></div>
+    <div class="add-row">
+      <input type="text" id="jobCustomInput" placeholder="Company &mdash; role (e.g. Groww &mdash; Ops Associate)" onkeydown="if(event.key==='Enter')addJobRow()">
+      <button onclick="addJobRow()">+ Add</button>
+    </div>
+    <div id="jobCustomList" class="task-list"></div>
+    <div style="font-family:var(--font-mono); font-size:0.68rem; color:var(--ink-mute); margin-top:12px;">Rule: no response in 7 days &rarr; follow up. No response in 14 days &rarr; move on.</div>
+  </div>
+
+  <div class="card">
+    <div class="card-title">&#128269; Alert keywords</div>
+    <div class="card-text">
+      <strong>Job titles:</strong>
+      <ol><li>Business Operations Associate</li><li>Operations Analyst</li><li>Growth Analyst</li><li>Business Analyst (Startup)</li><li>Chief of Staff (Junior)</li><li>Operations Associate</li></ol>
+      <strong>Locations:</strong> Bangalore, Mumbai, Delhi NCR, Hyderabad, Remote<br>
+      <strong>Filters:</strong> Seed/Series A, 11&ndash;50 employees, B2B SaaS, Fintech, Manufacturing Tech
+    </div>
+  </div>
+
+  <div class="sub-title">Job platforms &mdash; India</div>
+  <div class="card"><div class="tbl-wrap"><table class="tbl"><tr><th>Platform</th><th>Focus</th></tr><tr><td><strong><a href="https://wellfound.com/jobs" target="_blank" rel="noopener">Wellfound &#8599;</a></strong></td><td>Startup jobs, India/Remote &mdash; formerly AngelList Talent</td></tr><tr><td><strong><a href="https://www.workatastartup.com" target="_blank" rel="noopener">Work at a Startup &#8599;</a></strong></td><td>YC's own jobs board across 5,000+ funded companies</td></tr><tr><td><strong><a href="https://www.instahyre.com" target="_blank" rel="noopener">Instahyre &#8599;</a></strong></td><td>Inbound model &mdash; recruiters approach pre-screened profiles</td></tr><tr><td><strong><a href="https://www.hirect.in" target="_blank" rel="noopener">Hirect &#8599;</a></strong></td><td>Chat-first hiring &mdash; direct line to founders, no ATS black hole</td></tr><tr><td><strong><a href="https://cutshort.io" target="_blank" rel="noopener">Cutshort &#8599;</a></strong></td><td>AI-matched tech & ops roles at startups</td></tr><tr><td><strong><a href="https://linkedin.com/jobs" target="_blank" rel="noopener">LinkedIn Jobs &#8599;</a></strong></td><td>Set saved-search alerts for the target titles below</td></tr><tr><td><strong><a href="https://www.naukri.com" target="_blank" rel="noopener">Naukri &#8599;</a></strong></td><td>India's largest general job board &mdash; wide net for BizOps/Ops Associate titles</td></tr><tr><td><strong><a href="https://www.iimjobs.com" target="_blank" rel="noopener">IIMJobs &#8599;</a></strong></td><td>Leadership/management-track roles, skews more senior</td></tr></table></div></div>
+
+  <div class="card">
+    <div class="card-title">&#128176; Salary ladder</div>
+    <div class="tbl-wrap"><table class="tbl"><tr><th>Stage</th><th>Role</th><th>Salary</th><th>Timeline</th></tr><tr><td>Now</td><td>Operations Analyst (Greenlam)</td><td>&#8377;3&ndash;6L</td><td>Current</td></tr><tr><td>Jump 1</td><td>Business Operations Associate</td><td>&#8377;10&ndash;15L</td><td>0&ndash;6 months</td></tr><tr><td>Jump 2</td><td>Senior Ops / Junior CoS</td><td>&#8377;18&ndash;28L</td><td>6&ndash;12 months</td></tr><tr><td>Jump 3</td><td>Chief of Staff / VP Ops</td><td>&#8377;36&ndash;50L</td><td>12&ndash;18 months</td></tr></table></div>
+    <div style="margin-top:10px; font-family:var(--font-mono); font-size:0.72rem; color:var(--ink-mute); line-height:1.7;">
+      The &#8377;36&ndash;50L range sits at the 75th&ndash;90th percentile across sources &mdash; real for Jump 3, not for Jump 1. Full spread in Resources &darr;.
+    </div>
+  </div></div><div class="tabpanel" id="tab-skills"><div class="phase-head">
+    <div class="phase-eyebrow"><span class="n">05</span>Self-check</div>
+    <div class="phase-title">Skill Gap Map</div>
+    <div class="phase-desc">Tick what you'd genuinely defend in an interview today.</div>
+  </div>
+  <div class="card">
+    <div class="card-title">&#127919; The skill gap map</div>
+    <div class="card-text">Based on the resume plus market research from &#8377;36&ndash;50L job postings. Every skill maps to a curriculum module &mdash; tick it once you'd genuinely back yourself on it in an interview.</div>
+  </div>
+
+  <div class="sub-title">Tier A &mdash; non-negotiable <span class="count">must-have before applying</span></div>
+  <div class="card"><div class="task-list"><div class="task" data-id="skill-a-1" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main"><strong>Strategic thinking</strong></div><div class="t-sub">CoS must translate founder vision into executable plans &middot; Module 1, 3, 4</div></div>
+    </div><div class="task" data-id="skill-a-2" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main"><strong>Executive communication</strong></div><div class="t-sub">Widely cited as the #1 CoS skill by CEOs &middot; Module 1, 3, 4, 8</div></div>
+    </div><div class="task" data-id="skill-a-3" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main"><strong>OKR / EOS implementation</strong></div><div class="t-sub">CoS is typically the OKR champion &middot; Module 6</div></div>
+    </div><div class="task" data-id="skill-a-4" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main"><strong>Data-driven decision making</strong></div><div class="t-sub">Own the Scorecard, don't just read it &middot; Module 4, 6, 12</div></div>
+    </div><div class="task" data-id="skill-a-5" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main"><strong>Cross-functional execution</strong></div><div class="t-sub">CoS runs projects that don't fit inside one team &middot; Module 3, 10</div></div>
+    </div><div class="task" data-id="skill-a-6" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main"><strong>Financial literacy</strong></div><div class="t-sub">Reviewing P&Ls, burn rates, runway &middot; Module 1, 12</div></div>
+    </div></div></div>
+
+  <div class="sub-title">Tier B &mdash; strong differentiators <span class="count">build in parallel</span></div>
+  <div class="card"><div class="task-list"><div class="task" data-id="skill-b-1" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main"><strong>Hiring & people ops</strong></div><div class="t-sub">Startups scale through people; CoS often redesigns recruiting &middot; Module 13</div></div>
+    </div><div class="task" data-id="skill-b-2" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main"><strong>Fundraising literacy</strong></div><div class="t-sub">Prepping founders for investor meetings &middot; Module 12, 14</div></div>
+    </div><div class="task" data-id="skill-b-3" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main"><strong>Product sense</strong></div><div class="t-sub">Founder's Office touches product constantly &middot; Module 16</div></div>
+    </div><div class="task" data-id="skill-b-4" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main"><strong>Meeting design</strong></div><div class="t-sub">Bad meetings are startup cancer &middot; Module 6, 10</div></div>
+    </div><div class="task" data-id="skill-b-5" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main"><strong>Crisis management</strong></div><div class="t-sub">Startups are chaos; CoS must be the calmest person in the room &middot; Module 15</div></div>
+    </div></div></div>
+
+  <div class="sub-title">Tier C &mdash; nice to have <span class="count">learn after landing the first role</span></div>
+  <div class="card"><div class="task-list"><div class="task" data-id="skill-c-1" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main"><strong>Board governance</strong></div><div class="t-sub">Needed at Series B+, not Seed/Series A &middot; Module 18</div></div>
+    </div><div class="task" data-id="skill-c-2" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main"><strong>Advanced analytics / ML</strong></div><div class="t-sub">Nice for data-heavy startups, not core &middot; Module Self-study</div></div>
+    </div><div class="task" data-id="skill-c-3" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main"><strong>Public speaking / media</strong></div><div class="t-sub">For later-stage founders who need a proxy &middot; Module Post-hire</div></div>
+    </div><div class="task done" data-id="skill-c-4" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main"><strong>Deep industry specialization</strong></div><div class="t-sub">Manufacturing ops is a hidden advantage for B2B/industrial startups &middot; Module Immediate</div></div>
+    </div></div></div>
+
+  <div class="card">
+    <div class="card-title">&#128202; Current assets &mdash; already true</div>
+    <div class="card-text"><ul><li><strong>Technical execution:</strong> can build solo (Next.js, PHP/Laravel, SQL, Python)</li><li><strong>Data fluency:</strong> Excel (pivots, VLOOKUP, INDEX-MATCH), SQL, reporting</li><li><strong>Process improvement:</strong> built automated cross-checks that cut errors 60&ndash;70%</li><li><strong>Cross-functional exposure:</strong> manufacturing ops + software dev + sales</li><li><strong>Self-starter:</strong> 6+ side projects, deployed live</li><li><strong>Low-ego execution:</strong> took over QA/QC with zero documentation and built from scratch</li><li><strong>Manufacturing domain:</strong> B2B manufacturing tech is short on operators who understand both code and the factory floor</li></ul></div>
+  </div></div>
+<div class="foot-wrap">
+<div class="foot">
+  NOVA syncs through your own free Firebase project &mdash; open it on your phone, laptop, anywhere, and it's the same list.<br>
+  Not connected yet? It still works, saved to this browser only, until you finish the 2-minute setup below.
+  <br><button onclick="resetAll()">Reset all progress</button>
+</div>
+</div>
+</div>
+</div>
+<a href="#" class="totop" id="totop" onclick="window.scrollTo({top:0,behavior:'smooth'});return false;">&#8593;</a>
+<script>
+/* ============================================================
+   FIREBASE CONFIG
+   ------------------------------------------------------------
+   Paste your own project's config below (Firebase console ->
+   Project settings -> General -> Your apps -> SDK setup and
+   configuration). Until you do, NOVA runs in local-only mode:
+   fully functional, but ticks stay on this one device/browser.
+   ============================================================ */
+const firebaseConfig = {
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_PROJECT.firebaseapp.com",
+  projectId: "YOUR_PROJECT",
+  storageBucket: "YOUR_PROJECT.appspot.com",
+  messagingSenderId: "YOUR_SENDER_ID",
+  appId: "YOUR_APP_ID"
+};
+/* One document holds the whole tracker. Change this string once,
+   before first use, to anything you like — it just needs to stay
+   the same across all your devices. */
+const TRACKER_ID = "asis-nova-tracker-v1";
+
+let STATE = {};        // { id: true } for every checked task/module
+let CUSTOM_JOBS = [];  // [{id, text}]
+let STREAK = { count: 0, last: null };
+
+let fsApi = null;      // { setDoc, docRef }
+let cloudOn = false;
+
+/* ============ SYNC STATUS PILL ============ */
+function setSyncStatus(mode, label) {
+  const el = document.getElementById('syncStatus');
+  const lab = document.getElementById('syncLabel');
+  if (!el || !lab) return;
+  el.classList.remove('ok','local','err');
+  el.classList.add(mode);
+  lab.textContent = label;
+}
+
+/* ============ LOCAL FALLBACK ============ */
+function loadLocal() {
+  try {
+    const raw = localStorage.getItem('nova_data');
+    if (raw) {
+      const d = JSON.parse(raw);
+      STATE = d.state || {};
+      CUSTOM_JOBS = d.customJobs || [];
+      STREAK = d.streak || { count:0, last:null };
+    }
+  } catch (e) {}
+}
+function saveLocal() {
+  try { localStorage.setItem('nova_data', JSON.stringify({ state: STATE, customJobs: CUSTOM_JOBS, streak: STREAK })); } catch (e) {}
+}
+
+/* ============ FIREBASE (dynamic import, only if configured) ============ */
+async function initFirebase() {
+  if (!firebaseConfig.apiKey || firebaseConfig.apiKey.indexOf('YOUR_') === 0) {
+    setSyncStatus('local', 'Local only');
+    return;
+  }
+  try {
+    const appMod = await import("https://www.gstatic.com/firebasejs/12.16.0/firebase-app.js");
+    const fsMod = await import("https://www.gstatic.com/firebasejs/12.16.0/firebase-firestore.js");
+    const app = appMod.initializeApp(firebaseConfig);
+    const db = fsMod.getFirestore(app);
+    const ref = fsMod.doc(db, "trackers", TRACKER_ID);
+    fsApi = { setDoc: fsMod.setDoc, ref };
+
+    fsMod.onSnapshot(ref, (snap) => {
+      if (snap.exists()) {
+        const d = snap.data();
+        STATE = d.state || {};
+        CUSTOM_JOBS = d.customJobs || [];
+        STREAK = d.streak || { count:0, last:null };
+      }
+      seedDefaults();
+      cloudOn = true;
+      setSyncStatus('ok', 'Synced');
+      renderAll();
+      if (!snap.exists()) persist(); // first-ever sync: push seeded defaults up
+    }, (err) => {
+      console.error('Firestore listen error', err);
+      setSyncStatus('err', 'Sync error \u2014 saved locally');
+    });
+  } catch (e) {
+    console.error('Firebase init failed', e);
+    setSyncStatus('err', 'Offline \u2014 saved locally');
+  }
+}
+
+async function persist() {
+  saveLocal();
+  if (fsApi) {
+    try {
+      await fsApi.setDoc(fsApi.ref, { state: STATE, customJobs: CUSTOM_JOBS, streak: STREAK });
+    } catch (e) {
+      console.error('cloud save failed', e);
+      setSyncStatus('err', 'Save failed \u2014 saved locally');
+    }
+  }
+}
+
+/* ============ CORE CHECK LOGIC ============ */
+function allCheckables() {
+  return [...document.querySelectorAll('.task[data-id]'), ...document.querySelectorAll('.module[data-id]')];
+}
+
+function toggleTask(el) {
+  const id = el.dataset.id;
+  const willBeDone = !el.classList.contains('done');
+  el.classList.toggle('done', willBeDone);
+  STATE[id] = willBeDone;
+  persist();
+  updateProgress();
+}
+
+function toggleModule(moduleEl) {
+  const id = moduleEl.dataset.id;
+  const willBeDone = !moduleEl.classList.contains('done');
+  moduleEl.classList.toggle('done', willBeDone);
+  STATE[id] = willBeDone;
+  persist();
+  updateProgress();
+}
+
+function applyState() {
+  allCheckables().forEach(el => {
+    el.classList.toggle('done', !!STATE[el.dataset.id]);
+  });
+  updateProgress();
+}
+
+/* Preserves any HTML-baked "already done" defaults (LinkedIn items already
+   completed, Month 1 milestone, etc.) the FIRST time an id is ever seen.
+   Once an id exists in STATE — true or false — the user's own choice wins
+   forever after, on every device. */
+function seedDefaults() {
+  allCheckables().forEach(el => {
+    const id = el.dataset.id;
+    if (el.classList.contains('done') && !(id in STATE)) {
+      STATE[id] = true;
+    }
+  });
+}
+
+function updateProgress() {
+  const all = allCheckables();
+  const total = all.length;
+  const done = all.filter(el => el.classList.contains('done')).length;
+  const pct = total > 0 ? Math.round((done/total)*100) : 0;
+
+  const circumference = 2 * Math.PI * 19;
+  const ring = document.getElementById('ringFg');
+  if (ring) {
+    ring.style.strokeDasharray = circumference;
+    ring.style.strokeDashoffset = circumference - (pct/100)*circumference;
+  }
+  const pctLabel = document.getElementById('ringPct');
+  if (pctLabel) pctLabel.textContent = pct + '%';
+}
+
+/* ============ STREAK ============ */
+function todayStr() { return new Date().toISOString().slice(0,10); }
+
+function renderStreak() {
+  const el = document.getElementById('streakCount');
+  if (el) el.textContent = STREAK.count;
+  const btn = document.getElementById('rhythmBtn');
+  if (btn) {
+    if (STREAK.last === todayStr()) {
+      btn.textContent = '\u2713 Today logged \u2014 see you tomorrow';
+      btn.classList.add('btn-ghost'); btn.classList.remove('btn-primary');
+      btn.disabled = true;
+    } else {
+      btn.textContent = '\u2705 Mark today\u2019s rhythm complete';
+      btn.classList.add('btn-primary'); btn.classList.remove('btn-ghost');
+      btn.disabled = false;
+    }
+  }
+}
+
+function markRhythmDone() {
+  const today = todayStr();
+  if (STREAK.last === today) return;
+  const yesterday = new Date(Date.now() - 86400000).toISOString().slice(0,10);
+  STREAK.count = (STREAK.last === yesterday) ? STREAK.count + 1 : 1;
+  STREAK.last = today;
+  persist();
+  renderStreak();
+}
+
+/* ============ COPY ============ */
+function copyText(btn) {
+  const pre = btn.previousElementSibling;
+  const text = pre.textContent;
+  navigator.clipboard.writeText(text).then(() => {
+    const original = btn.textContent;
+    btn.textContent = 'COPIED';
+    setTimeout(() => { btn.textContent = original; }, 1400);
+  }).catch(() => {
+    const original = btn.textContent;
+    btn.textContent = 'FAILED';
+    setTimeout(() => { btn.textContent = original; }, 1400);
+  });
+}
+
+/* ============ CUSTOM JOB ROWS (no form, just append-a-line) ============ */
+function escapeHtml(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+function renderCustomJobs() {
+  const list = document.getElementById('jobCustomList');
+  if (!list) return;
+  list.innerHTML = CUSTOM_JOBS.map(j => `
+    <div class="task${STATE[j.id] ? ' done' : ''}" data-id="${j.id}" onclick="toggleTask(this)">
+      <div class="box">&#10003;</div>
+      <div class="t-body"><div class="t-main">${escapeHtml(j.text)}</div></div>
+      <button class="task-del" onclick="event.stopPropagation(); deleteJobRow('${j.id}')">&#10005;</button>
+    </div>`).join('');
+}
+
+function addJobRow() {
+  const input = document.getElementById('jobCustomInput');
+  const text = input.value.trim();
+  if (!text) return;
+  const id = 'job-custom-' + Date.now();
+  CUSTOM_JOBS.unshift({ id, text });
+  persist();
+  input.value = '';
+  renderCustomJobs();
+  updateProgress();
+}
+
+function deleteJobRow(id) {
+  CUSTOM_JOBS = CUSTOM_JOBS.filter(j => j.id !== id);
+  delete STATE[id];
+  persist();
+  renderCustomJobs();
+  updateProgress();
+}
+
+/* ============ TABS ============ */
+function showTab(tabId) {
+  document.querySelectorAll('.tabpanel').forEach(p => p.classList.toggle('active', p.id === 'tab-' + tabId));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.dataset.tab === tabId));
+  window.scrollTo({ top: 0 });
+  try { localStorage.setItem('nova_last_tab', tabId); } catch (e) {}
+}
+
+/* ============ RESET ============ */
+async function resetAll() {
+  if (!confirm('This clears every tick, the streak, and your logged applications \u2014 on every device this tracker syncs to. This cannot be undone. Continue?')) return;
+  STATE = {}; CUSTOM_JOBS = []; STREAK = { count:0, last:null };
+  await persist();
+  location.reload();
+}
+
+/* ============ BACK TO TOP ============ */
+window.addEventListener('scroll', () => {
+  const btn = document.getElementById('totop');
+  if (!btn) return;
+  btn.classList.toggle('show', window.scrollY > 600);
+});
+
+/* ============ RENDER ALL ============ */
+function renderAll() {
+  applyState();
+  renderCustomJobs();
+  renderStreak();
+  updateProgress();
+}
+
+/* ============ INIT ============ */
+async function init() {
+  loadLocal();
+  seedDefaults();
+  renderAll();
+  try {
+    const lastTab = localStorage.getItem('nova_last_tab');
+    if (lastTab) showTab(lastTab);
+  } catch (e) {}
+  initFirebase(); // upgrades to live sync if configured; safe no-op otherwise
+}
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
